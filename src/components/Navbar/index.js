@@ -2,6 +2,19 @@
 
 import {Fragment} from "react";
 
+
+function NavItem(){
+
+    return(
+        <div className="items-center justify-between w-full md:flex md:w-auto" id="nav-items">
+
+            <ul className="lex flex-col p-4 md:p-0 mt-4 font-medium  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white">
+
+            </ul>
+        </div>
+    )
+}
+
 export default function Navbar(){
 
     const isAdminView =false;
