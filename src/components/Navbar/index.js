@@ -6,6 +6,9 @@ export default function Navbar(){
 
     const isAdminView =false;
     const isAuthUser =false;
+    const user = {
+        role : 'admin'
+    }
 
 
     return(
@@ -26,7 +29,14 @@ export default function Navbar(){
                     <button>Cart</button>
                     </Fragment>
                 ) : null}
-                  
+                  {
+                    user?.role === 'admin' ?
+                    isAdminView ? <button>Client View</button> : <button>Admin Veiw</button>
+                    : null
+                  }
+                  {
+                    isAuthUser ? <button>Logout</button> : <button>Login</button>
+                  }
          </div>
         </div>
 
