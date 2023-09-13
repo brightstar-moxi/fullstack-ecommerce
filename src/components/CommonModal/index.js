@@ -2,7 +2,7 @@
 import { Transition, Dialog } from "@headlessui/react"
 import { Fragment } from "react"
 
-export default function CommonModal({modalTitle, mainContent}) {
+export default function CommonModal({modalTitle, mainContent, showButton}) {
 
     return (
         <Transition.Root as={Fragment}>
@@ -48,6 +48,9 @@ export default function CommonModal({modalTitle, mainContent}) {
 
                       </div>
                   </div>
+                  {
+                      showButtons ?<div className="border-t border-gray-300 px-4 py-6 sm:px-6">{buttonComponent}</div> : null
+                  }
 
                 </div>
             </Dialog>
