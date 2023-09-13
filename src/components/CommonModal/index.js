@@ -13,6 +13,8 @@ export default function CommonModal(){
                 enterFrom="opacity-0"
                 enterTo="opacity-100"
                 leave="ease-in-out duration-500"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
                 >
 
                 </Transition.Child>
