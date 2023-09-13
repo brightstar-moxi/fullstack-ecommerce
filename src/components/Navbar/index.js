@@ -3,7 +3,7 @@
 import { adminNavOptions,navOptions, styles } from "@/utils";
 import { Fragment } from "react";
 const isAdminView = false;
-const isAuthUser = false;
+const isAuthUser = true;
 const user = {
     role: 'admin'
 }
@@ -53,7 +53,7 @@ export default function Navbar() {
                     <div className="flex md:order-2 gap-2 ">
                         {!isAdminView && isAuthUser ? (
                             <Fragment>
-                                <button className={styles.button}>Account</button>
+                                <button  className={styles.button}>Account</button>
                                 <button className={styles.button}>Cart</button>
                             </Fragment>
                         ) : null}
@@ -63,7 +63,7 @@ export default function Navbar() {
                                 : null
                         }
                         {
-                            isAuthUser ? <button className={styles.button}>Logout</button> : <button className={styles.button}>Login</button>
+                            isAuthUser ? <button className={styles.button} >Logout</button> : <button className={styles.button}>Login</button>
                         }
                            <button
               data-collapse-toggle="navbar-sticky"
