@@ -1,8 +1,8 @@
 "use client"
-import { Transition } from "@headlessui/react"
+import { Transition, Dialog } from "@headlessui/react"
 import { Fragment } from "react"
 
-export default function CommonModal() {
+export default function CommonModal({modalTitle, mainContent}) {
 
     return (
         <Transition.Root as={Fragment}>
@@ -35,11 +35,12 @@ export default function CommonModal() {
                                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                       <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                           <div className="flex items-start justify-between">
-
+                                               <Dialog.Title>{modalTitle}</Dialog.Title>
+                                          </div>
+                                          <div className="mt-8">
+                                              {mainContent}
                                           </div>
                                       </div>
-
-
                                   </div>
                               </Dialog.Panel>
 
