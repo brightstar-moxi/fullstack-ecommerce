@@ -21,7 +21,18 @@ export default function CommonModal() {
                 </Transition.Child>
                 <div className="fixed inset-0 overflow-hidden">
                   <div className="absolute inset-0 overflow-hidden">
-                      <div className="fixed insert-y-o">
+                      <div className="fixed insert-y-0 right-0 flex max-w-full pl-10">
+                          <Transition.Child
+                          as={Fragment}
+                          enter="ease-in-out duration-900"
+                          enterFrom="opacity-0"
+                          enterTo="opacity-100"
+                          leave="ease-in-out duration-500"
+                          leaveFrom="opacity-100"
+                          leaveTo="opacity-0"
+                          >
+
+                          </Transition.Child>
 
                       </div>
                   </div>
