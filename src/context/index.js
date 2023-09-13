@@ -5,13 +5,13 @@ import { createContext, useState } from "react";
 
 
 
-export const GLobalContext = createContext(null);
+export const GlobalContext = createContext(null);
 
 
-export default function GLobalState({children}){
-    const [showNavModal, setShowNavModal]= useState(false)
+export default function GlobalState({ children }) {
+    const [showNavModal, setShowNavModal] = useState(false)
 
     return (
-        <GLobalContext.Provider value={{showNavModal, setShowNavModal}}>{children}</GLobalContext.Provider>
+        <GlobalContext.Provider value={{ showNavModal, setShowNavModal }}>{children}</GlobalContext.Provider>
     )
 }
