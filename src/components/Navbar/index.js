@@ -12,10 +12,10 @@ const user = {
     role: 'admin'
 }
 
-function NavItems() {
+function NavItems({isModalView =false}) {
 
     return (
-        <div className="items-center justify-between w-full md:flex md:w-auto" id="nav-items">
+        <div className={`items-center justify-between w-full md:flex md:w-auto ${isModalView ? "" : "hidden"}`} id="nav-items">
 
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white">
                 {
@@ -94,14 +94,14 @@ export default function Navbar() {
             </button>
          
                     </div>
-                    <NavItems isModal={false}/>
+                    <NavItems />
                 </div>
 
 
             </nav>
             <CommonModal
             showModalTitle={false}
-            mainContent={}
+            mainContent={<NavItems isModalView={true}/>}
              show={showNavModal} setShow={setShowNavModal}/>
         </>
     )
