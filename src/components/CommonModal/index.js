@@ -39,7 +39,7 @@ export default function CommonModal({ modalTitle, mainContent, showButtons, butt
                                                 <Dialog.Title>{modalTitle}</Dialog.Title>
                                             </div> : null
                                             }
-                                            <div className="mt-8">
+                                            <div className="mt-20">
                                                 {mainContent}
                                             </div>
                                         </div>
