@@ -12,7 +12,7 @@ const user = {
     role: 'admin'
 }
 
-function NavItem() {
+function NavItems() {
 
     return (
         <div className="items-center justify-between w-full md:flex md:w-auto" id="nav-items">
@@ -86,20 +86,23 @@ export default function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </button>
          
                     </div>
-                    <NavItem/>
+                    <NavItems isModal={false}/>
                 </div>
 
 
             </nav>
-            <CommonModal show={showNavModal}/>
+            <CommonModal
+            showModalTitle={false}
+            mainContent={}
+             show={showNavModal} setShow={setShowNavModal}/>
         </>
     )
 }
