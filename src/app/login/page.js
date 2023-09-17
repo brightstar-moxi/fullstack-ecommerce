@@ -1,9 +1,9 @@
-
+"use client"
 
 
 export default function Login() {
     
     return(
-        <div></div>
+        <div className="bg-white relative"> Login</div>
     )
 }
