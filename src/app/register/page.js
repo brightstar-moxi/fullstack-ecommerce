@@ -1,6 +1,10 @@
 "use client"
 
-const isRegistered = true
+import { registrationFormControls } from "@/utils"
+import InputComponent from "@/components/FormElement/InputComponent"
+import SelectComponent from "@/components/FormElement/SelectComponent"
+
+const isRegistered = false
 
 export default function Register() {
 
@@ -19,7 +23,22 @@ export default function Register() {
                                 isRegistered ? <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out
                                  focus:shadow font-medium uppercase tracking-wide">
                                     Login
-                                </button> : null
+                                </button> :
+                                    <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+                                        {
+                                            registrationFormControls.map(controlItem => controlItem.componentType === 'input' ? 
+                                            <InputComponent
+                                                type={controlItem.type}
+                                                placeholder={controlItem.placeholder}
+                                                label={controlItem.label}
+                                            /> :
+                                                controlItem.componentType === 'select' ? <SelectComponent
+                                                    options={controlItem.options}
+                                                    label={controlItem.label}
+                                                /> : null
+                                            )
+                                        }
+                                    </div>
                             }
                         </div>
                     </div>
