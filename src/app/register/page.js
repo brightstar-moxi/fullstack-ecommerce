@@ -1,6 +1,6 @@
 "use client"
 
-const isRegistered = false
+const isRegistered = true
 
 export default function Register() {
 
@@ -16,7 +16,8 @@ export default function Register() {
                                 }
                             </p>
                             {
-                                isRegistered ? <button className="inline-flex w-full">
+                                isRegistered ? <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out
+                                 focus:shadow font-medium uppercase tracking-wide">
                                     Login
                                 </button> : null
                             }
