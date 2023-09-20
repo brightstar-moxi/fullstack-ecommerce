@@ -3,10 +3,36 @@
 import { registrationFormControls } from "@/utils"
 import InputComponent from "@/components/FormElement/InputComponent"
 import SelectComponent from "@/components/FormElement/SelectComponent"
+import { useState } from "react"
+import { registerNewUser } from "@/services/register"
 
 const isRegistered = false
 
+const initialFormData = {
+    name: "",
+    email: "",
+    password: "",
+    role: "customer"
+}
+
 export default function Register() {
+
+    const [formData, setFormData] = useState(initialFormData);
+
+    console.log(formData)
+
+    function isFormVaild() {
+
+        return formData && formData.name && formData.name.trim() !== ""
+            && formData.email && formData.email.trim() !== ""
+            && formData.password && formData.password.trim() !== "" ? true : false
+    }
+    console.log(isFormVaild())
+
+    async function handleRegisterOnSubmit() {
+
+        const data = await registerNewUser(formData)
+    }
 
     return (
         <div className="bg-white relative">
@@ -32,16 +58,33 @@ export default function Register() {
                                                     type={controlItem.type}
                                                     placeholder={controlItem.placeholder}
                                                     label={controlItem.label}
+                                                    onChange={(event) => {
+                                                        setFormData({
+                                                            ...formData,
+                                                            [controlItem.id]: event.target.value
+                                                        })
+                                                    }}
+                                                    value={formData[controlItem.id]}
                                                 />) :
                                                 controlItem.componentType === 'select' ? (<SelectComponent
                                                     options={controlItem.options}
                                                     label={controlItem.label}
+                                                    onChange={(event) => {
+                                                        setFormData({
+                                                            ...formData,
+                                                            [controlItem.id]: event.target.value
+                                                        })
+                                                    }}
+                                                    value={formData[controlItem.id]}
                                                 />
                                                 ) : null
                                             )
                                         }
-                                        <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out
-                                 focus:shadow font-medium uppercase tracking-wide">
+                                        <button className="disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out
+                                 focus:shadow font-medium uppercase tracking-wide"
+                                            disabled={!isFormVaild()}
+                                            onClick={handleRegisterOnSubmit}
+                                        >
                                             Register
                                         </button>
                                     </div>
