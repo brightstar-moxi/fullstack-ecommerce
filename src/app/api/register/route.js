@@ -28,4 +28,26 @@ if(error){
     })
 }
 
+try {
+    //check if the user is exists or not
+
+    const isUserAlreadyExists = await User.findOne({email});
+
+    if (isUserAlreadyExists){
+
+        return NextResponse.json({
+            success : false,
+            message :"User is already exists."
+        })
+    }
+} catch (error) {
+    console.log('Error is new user registration')
+    
+    return NextResponse.json({
+        success : false,
+        message : 'something went wrong ! Please try again later'
+    })
+    
+}
+
 }
