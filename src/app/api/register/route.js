@@ -1,4 +1,6 @@
 import connectToDB from "@/database";
+import User from "@/models/user";
+import { hash } from "bcryptjs";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 
@@ -37,8 +39,20 @@ try {
 
         return NextResponse.json({
             success : false,
-            message :"User is already exists."
+            message :"User is already exists. Please try with different email"
         })
+    }else{
+        const hashPassword = await hash(password, 12);
+
+        const newlyCreatedUser = await User.create({
+            name,email,password : hashPassword, role
+        })
+        if(newlyCreatedUser){
+            return NextResponse.json({
+                success : true,
+                message :"Account created successfully."
+            })
+        }
     }
 } catch (error) {
     console.log('Error is new user registration')
