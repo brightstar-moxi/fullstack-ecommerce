@@ -31,8 +31,10 @@ export default function Register() {
 
     async function handleRegisterOnSubmit() {
 
-        const data = await registerNewUser(formData)
+        const data = await registerNewUser(formData);
+        console.log(data);   
     }
+   
 
     return (
         <div className="bg-white relative">
