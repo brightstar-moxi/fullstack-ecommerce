@@ -1,14 +1,25 @@
 
 
 
-export const login = async(formData)=>{
+export const login = async (formData) => {
 
-    try{
+    try {
         const response = await fetch('/api/login', {
-            method : "POST",
-            headers : {
+            method: "POST",
+            headers: {
                 "content-type": "application/json",
-            }
+            },
+            body: JSON.stringify(formData)
+
         })
+
+        const data = response.json();
+
+
+        return data;
+
+
+    } catch (error) {
+        console.log(error)
     }
 }
