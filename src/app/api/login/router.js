@@ -60,12 +60,12 @@ export async function POST(req) {
                 role: checkUser.role
             }
 
-          
+
         }
         return NextResponse.json({
-                success: true,
-                message: "Login successfull",
-                finalData,
+            success: true,
+            message: "Login successfull",
+            finalData,
         })
 
     } catch (e) {
