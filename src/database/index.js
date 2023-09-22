@@ -26,7 +26,7 @@ const configOptions = {
 
 const connectToDB = async () => {
   const connectionUrl =
-    "mongodb+srv://jojololamoses:Tiplingold@cluster0.s29silt.mongodb.net/";
+    "mongodb+srv://moxiz:123456782023@cluster0.vwvvdox.mongodb.net/";
 
   mongoose
     .connect(connectionUrl, configOptions)
@@ -34,6 +34,7 @@ const connectToDB = async () => {
     .catch((err) =>
       console.log(`Getting Error from DB connection ${err.message}`)
     );
+  
 };
 
 export default connectToDB;

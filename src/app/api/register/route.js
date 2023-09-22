@@ -118,13 +118,18 @@ export async function POST(req) {
         password: hashPassword,
         role,
       });
+    
 
       if (newlyCreatedUser) {
+        
         return NextResponse.json({
           success: true,
           message: "Account created successfully.",
+          
         });
+        
       }
+      console.log(newlyCreatedUser);
     }
   } catch (error) {
     console.log("Error while new user registration. Please try again");
