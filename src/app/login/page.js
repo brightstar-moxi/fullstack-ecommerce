@@ -117,7 +117,7 @@ if (isAuthUser) router.push("/");
                   onClick={handleLogin}
                 >
                     {
-                                componentLevelLoader &&  componentLevelLoader.loading?
+                                componentLevelLoader &&  componentLevelLoader.loading? <ComponentLevelLoader/> : 'Login'
                     }
                                 </button>
                                 <div className="flex flex-col gap-2">
