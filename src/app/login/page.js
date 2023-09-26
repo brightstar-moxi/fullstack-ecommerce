@@ -72,6 +72,11 @@ async function handleLogin(){
 // }
 // }
 console.log(isAuthUser, user)
+
+useEffect(()=>{
+if (isAuthUser) router.push("/");
+}, [isAuthUser])
+
     return (
         <div className="bg-white relative">
             <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto xl:px-5 lg:flex-row">
