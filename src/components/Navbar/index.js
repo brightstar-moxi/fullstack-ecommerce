@@ -2,15 +2,13 @@
 
 import { GlobalContext } from "@/context";
 import { adminNavOptions,navOptions } from "@/utils";
+import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useContext } from "react";
 import CommonModal from "../CommonModal";
-
+import Cookies from "js-cookie";
 
 const isAdminView = false;
-const isAuthUser = true;
-const user = {
-    role: 'admin'
-}
+
 
 function NavItems({isModalView = false}) {
 
@@ -49,7 +47,26 @@ function NavItems({isModalView = false}) {
 export default function Navbar() {
 
     const { showNavModal, setShowNavModal } = useContext(GlobalContext);
+  
+    const { user,
+      isAuthUser,
+      setIsAuthUser,
+      setUser,
+      currentUpdatedProduct,
+      setCurrentUpdatedProduct,
+      showCartModal,
+      setShowCartModal} = useContext(GlobalContext);
+    const router = useRouter()
 
+    console.log(user, isAuthUser, 'navbar')
+
+    function handleLogout(){
+      setIsAuthUser(false)
+      setUser(null)
+      Cookies.remove('token')
+      localStorage.clear()
+      router.push('/')
+    }
 
     return (
         <>
@@ -71,11 +88,13 @@ export default function Navbar() {
                         ) : null}
                         {
                             user?.role === 'admin' ?
-                                isAdminView ? <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Client View</button> : <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Admin Veiw</button>
+                                isAdminView ? (<button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Client View</button>)
+                                 : (<button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Admin Veiw</button>)
                                 : null
                         }
                         {
-                            isAuthUser ? <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" >Logout</button> : <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button>
+                            isAuthUser ? (<button onClick={handleLogout} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" >Logout</button>) : 
+                            (<button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button>)
                         }
                            <button
               data-collapse-toggle="navbar-sticky"
