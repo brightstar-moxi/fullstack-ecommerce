@@ -94,7 +94,7 @@ export default function Navbar() {
                         }
                         {
                             isAuthUser ? (<button onClick={handleLogout} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" >Logout</button>) : 
-                            (<button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button>)
+                            (<button onClick={()=> router.push('/login')} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button>)
                         }
                            <button
               data-collapse-toggle="navbar-sticky"
