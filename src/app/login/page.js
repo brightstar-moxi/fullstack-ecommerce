@@ -36,6 +36,7 @@ export default function Login() {
     }
 
 async function handleLogin(){
+    setComponentLevelLoader({loading : true, id : ""})
     const res = await login(formData);
 
     console.log(res);
@@ -46,9 +47,11 @@ async function handleLogin(){
         SetFormData(initialFormdata);
         Cookies.set('token', res?.finalData?.token);
         localStorage.setItem('user', JSON.stringify(res?.finalData?.user));
+        setComponentLevelLoader({loading : false, id : ""})
 
     }else {
-        setIsAuthUser(false)
+        setIsAuthUser(false);
+        setComponentLevelLoader({loading : true, id : ""})
     }
 }
 
@@ -113,7 +116,9 @@ if (isAuthUser) router.push("/");
                   disabled={!isValidForm()}
                   onClick={handleLogin}
                 >
-                                    Login
+                    {
+                                componentLevelLoader &&  componentLevelLoader.loading?
+                    }
                                 </button>
                                 <div className="flex flex-col gap-2">
                                     <p>New to website ?</p>
