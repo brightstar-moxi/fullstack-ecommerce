@@ -1,12 +1,13 @@
 "use client"
 
 import InputComponent from "@/components/FormElement/InputComponent"
-import { GlobalContext } from "@/context"
+import { GlobalContext } from "@/context";
 import { login } from "@/services/login"
 import { loginFormControls } from "@/utils"
-import { set } from "mongoose"
+import Cookies from "js-cookie"
+
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react";
 
 const initialFormdata = {
     email: "",
@@ -16,7 +17,14 @@ const initialFormdata = {
 export default function Login() {
 
     const [formData, SetFormData] = useState(initialFormdata)
-    const {isAuthUser, setIsAuthUser, user, setUser} = useContext(GlobalContext)
+    const {
+        isAuthUser,
+        setIsAuthUser,
+        user,
+        setUser,
+        componentLevelLoader,
+        setComponentLevelLoader,
+      } = useContext(GlobalContext);
 
     const router = useRouter();
 
@@ -28,19 +36,42 @@ export default function Login() {
     }
 
 async function handleLogin(){
+//     const res = await login(formData);
+
+//     console.log(res);
+
+//     if(res.success){
+//         setIsAuthUser(true);
+//         setUser(res?.finalData?.user);
+//         SetFormData(initialFormdata);
+//         Cookies.set('token', res?.finalData?.token);
+//         localStorage.setItem('user', JSON.stringify(res?.finalData?.user));
+
+//     }else {
+//         setIsAuthUser(false)
+//     }
+// }
+
+try {
     const res = await login(formData);
-
-    console.log(res);
-
-    if(res.success){
+    
+    console.log("Response:", res);
+    
+    if (res.succes) {
         setIsAuthUser(true);
         setUser(res?.finalData?.user);
-        
-    }else {
-        setIsAuthUser(false)
+        SetFormData(initialFormdata);
+        Cookies.set('token', res?.finalData?.token);
+        localStorage.setItem('user', JSON.stringify(res?.finalData?.user));
+    } else {
+        setIsAuthUser(false);
     }
+} catch (error) {
+    // Handle errors here, e.g., display an error message to the user.
+    console.error("An error occurred:", error);
 }
-
+}
+console.log(isAuthUser, user)
     return (
         <div className="bg-white relative">
             <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto xl:px-5 lg:flex-row">
