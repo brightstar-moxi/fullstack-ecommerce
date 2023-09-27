@@ -56,9 +56,11 @@ export default function Navbar() {
       setCurrentUpdatedProduct,
       showCartModal,
       setShowCartModal} = useContext(GlobalContext);
+
+      const pathName = usePathname();
     const router = useRouter()
 
-    console.log(user, isAuthUser, 'navbar')
+    console.log(pathName)
 
     function handleLogout(){
       setIsAuthUser(false)
@@ -88,8 +90,10 @@ export default function Navbar() {
                         ) : null}
                         {
                             user?.role === 'admin' ?
-                                isAdminView ? (<button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Client View</button>)
-                                 : (<button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Admin Veiw</button>)
+                                isAdminView ? (
+                                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Client View</button>)
+                                 : (
+                                 <button onClick={()=> router.push('/admin-view')} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Admin Veiw</button>)
                                 : null
                         }
                         {
