@@ -5,9 +5,11 @@ import { GlobalContext } from "@/context";
 import { login } from "@/services/login"
 import { loginFormControls } from "@/utils"
 import Cookies from "js-cookie"
-
+import Notification from "@/components/Notification";
+import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const initialFormdata = {
     email: "",
@@ -42,6 +44,9 @@ async function handleLogin(){
     console.log(res);
 
     if(res.success){
+        toast.success(res.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
         setIsAuthUser(true);
         setUser(res?.finalData?.user);
         SetFormData(initialFormdata);
@@ -50,6 +55,9 @@ async function handleLogin(){
         setComponentLevelLoader({loading : false, id : ""})
 
     }else {
+        toast.error(res.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
         setIsAuthUser(false);
         setComponentLevelLoader({loading : true, id : ""})
     }
@@ -117,7 +125,11 @@ if (isAuthUser) router.push("/");
                   onClick={handleLogin}
                 >
                     {
-                                componentLevelLoader &&  componentLevelLoader.loading? <ComponentLevelLoader/> : 'Login'
+                                componentLevelLoader &&  componentLevelLoader.loading? <ComponentLevelLoader
+                                text={"Logging In"}
+                                color={"#ffffff"}
+                                loading={componentLevelLoader && componentLevelLoader.loading}
+                                /> : 'Login'
                     }
                                 </button>
                                 <div className="flex flex-col gap-2">
@@ -135,6 +147,7 @@ if (isAuthUser) router.push("/");
                     </div>
                 </div>
             </div>
+            <Notification/>
         </div>
 
     )
