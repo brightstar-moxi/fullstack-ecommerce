@@ -1,12 +1,17 @@
 "use client"
 
-import { registrationFormControls } from "@/utils"
-import InputComponent from "@/components/FormElement/InputComponent"
-import SelectComponent from "@/components/FormElement/SelectComponent"
-import { useState } from "react"
-import { registerNewUser } from "@/services/register"
+import { registrationFormControls } from "@/utils";
+import InputComponent from "@/components/FormElement/InputComponent";
+import SelectComponent from "@/components/FormElement/SelectComponent";
+import { useContext, useEffect, useState } from "react";
+import { registerNewUser } from "@/services/register";
+import ComponentLevelLoader from "@/components/Loader/componentlevel";
+import Notification from "@/components/Notification";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { GlobalContext } from "@/context";
 
-const isRegistered = false
+// const isRegistered = false
 
 const initialFormData = {
     name: "",
@@ -18,6 +23,10 @@ const initialFormData = {
 export default function Register() {
 
     const [formData, setFormData] = useState(initialFormData);
+    const [isRegistered, setIsRegistered] = useState(false);
+    const { pageLevelLoader, setPageLevelLoader, isAuthUser } = useContext(GlobalContext);
+
+    const router = useRouter()
 
     console.log(formData)
 
@@ -30,12 +39,29 @@ export default function Register() {
     console.log(isFormVaild())
 
     async function handleRegisterOnSubmit() {
-
+        setPageLevelLoader(true);
         const data = await registerNewUser(formData);
-        console.log(data);   
-    }
-   
+        if (data.success) {
+            toast.success(data.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            setIsRegistered(true);
+            setPageLevelLoader(false);
+            setFormData(initialFormData);
+        } else {
+            toast.error(data.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            setPageLevelLoader(false);
+            setFormData(initialFormData);
+        }
+        console.log(data);
 
+    }
+
+    useEffect(() => {
+        if (isAuthUser) router.push("/");
+    }, [isAuthUser])
     return (
         <div className="bg-white relative">
             <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto xl:px-5 lg:flex-row">
@@ -49,7 +75,9 @@ export default function Register() {
                             </p>
                             {
                                 isRegistered ? (<button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out
-                                 focus:shadow font-medium uppercase tracking-wide">
+                                 focus:shadow font-medium uppercase tracking-wide"
+                                    onClick={() => router.push('/login')}
+                                >
                                     Login
                                 </button>
                                 ) : (
@@ -87,7 +115,15 @@ export default function Register() {
                                             disabled={!isFormVaild()}
                                             onClick={handleRegisterOnSubmit}
                                         >
-                                            Register
+                                            {pageLevelLoader ? (
+                                                <ComponentLevelLoader
+                                                    text={"Registering"}
+                                                    color={"#ffffff"}
+                                                    loading={pageLevelLoader}
+                                                />
+                                            ) : (
+                                                "Register"
+                                            )}
                                         </button>
                                     </div>
                                 )}
