@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 const ProductSchema = new mongoose.Schema({
     name: String,
     description: String,
+    price: Number,
     categotry: String,
     sizes: Array,
     deliveryInfo: String,
