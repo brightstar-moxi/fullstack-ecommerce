@@ -25,7 +25,7 @@ export default function TileComponent({
                     : ""
                 }`}
             >
-                {DataItem.label}
+                {dataItem.label}
             </span>
             </label>
               ))

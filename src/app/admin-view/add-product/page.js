@@ -31,18 +31,27 @@ export default function AdminAddNewProduct() {
                         />
                     </div>
                     {
-                        adminAddProductformControls.map(controlItem=>
+                        adminAddProductformControls.map(controlItem =>
                             controlItem.componentType === 'input' ? (
-                            <InputComponent
-                            type={controlItem.type}
-                            placeholder={controlItem.placeholder}
-                            label={controlItem.label}
-                            />
-                            ):
-                           
-                            controlItem.componentType === 'select' ? ( <SelectComponent/>) : null
-                            )
+                                <InputComponent
+                                    type={controlItem.type}
+                                    placeholder={controlItem.placeholder}
+                                    label={controlItem.label}
+                                />
+                            ) :
+
+                                controlItem.componentType === 'select' ? (<SelectComponent
+                                    label={controlItem.label}
+                                    options={controlItem.options}
+                                />
+                                ) : null
+                        )
                     }
+                    <button
+                        className="inline-flex w-full Items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking"
+                    >
+                        Add Product
+                    </button>
                 </div>
             </div>
 
