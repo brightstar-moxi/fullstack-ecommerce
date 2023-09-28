@@ -1,7 +1,9 @@
 "use client"
 
+import InputComponent from "@/components/FormElement/InputComponent"
+import SelectComponent from "@/components/FormElement/SelectComponent"
 import TileComponent from "@/components/FormElement/TileComponent"
-import { AvailableSizes } from "@/utils"
+import { adminAddProductformControls, AvailableSizes } from "@/utils"
 
 
 
@@ -28,6 +30,19 @@ export default function AdminAddNewProduct() {
                             data={AvailableSizes}
                         />
                     </div>
+                    {
+                        adminAddProductformControls.map(controlItem=>
+                            controlItem.componentType === 'input' ? (
+                            <InputComponent
+                            type={controlItem.type}
+                            placeholder={controlItem.placeholder}
+                            label={controlItem.label}
+                            />
+                            ):
+                           
+                            controlItem.componentType === 'select' ? ( <SelectComponent/>) : null
+                            )
+                    }
                 </div>
             </div>
 
