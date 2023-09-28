@@ -12,7 +12,7 @@ const AddNewProductSchema = Joi.object({
     sizes: Joi.array().required(),
     deliveryInfo: Joi.string().required(),
     onSale: Joi.string().required(),
-    priceDrop : Joi.number().required(),
+    priceDrop: Joi.number().required(),
     imageUrl: Joi.string().required()
 })
 
@@ -21,7 +21,50 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req) {
     try {
-        await connectToDB()
+        await connectToDB();
+
+        const user = 'admin';
+
+        if (user === 'admin') {
+            const extractData = await req.json()
+
+            const {
+                name, description, price, imageUrl, categotry, sizes, deliveryInfo, onSale, priceDrop
+            } = extractData;
+
+            const {error} = AddNewProductSchema.validate({
+                name, description, price, imageUrl, categotry, sizes, deliveryInfo, onSale, priceDrop
+            });
+            if (error) {
+  
+                return NextResponse.json({
+                  success: false,
+                  message: error.details[0].message,
+                });
+              }
+
+              const newlyCreatedProduct = await Product.create(extractData);
+
+              if (newlyCreatedProduct) {
+  
+                return NextResponse.json({
+                  success: true,
+                  message: "Product added successfully",
+                });
+              } else {
+                return NextResponse.json({
+                    success: false,
+                    message: "Failed to add the product ! please try again",
+                  });
+              }
+
+        } else {
+            return NextResponse.json({
+                success: false,
+                message: "You are not authorised",
+            });
+        }
+
     } catch (error) {
         console.log(error);
 
