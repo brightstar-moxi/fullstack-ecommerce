@@ -1,30 +1,36 @@
 "use client"
 
+import TileComponent from "@/components/FormElement/TileComponent"
+import { AvailableSizes } from "@/utils"
 
 
-export default function AdminAddNewProduct(){
 
-    function handleImage(){
+export default function AdminAddNewProduct() {
+
+    function handleImage() {
 
     }
 
-    return(
+    return (
         <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
             <div className="flex flex-col item-start justify-start p-10 bg-white shadow-2xl rounded-xl relative">
                 <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-8">
                     <input
-                    accept="image/*"
-                    max= "1000000"
-                    type="file"
-                    onChange={handleImage}
+                        accept="image/*"
+                        max="1000000"
+                        type="file"
+                        onChange={handleImage}
                     />
 
                     <div className="flex gap-2 flex-col">
                         <label>Avaliable sizes</label>
+                        <TileComponent
+                            data={AvailableSizes}
+                        />
                     </div>
                 </div>
             </div>
-         
+
         </div>
     )
 }
