@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 // const isAdminView = false;
 
 
-function NavItems({ isModalView = false, isAdminView }) {
+function NavItems({ isModalView = false, isAdminView, router }) {
 
   return (
     // <div className={`items-center justify-between w-full md:flex md:w-auto ${isModalView ? "" : "hidden"}`} id="nav-items">
@@ -25,14 +25,16 @@ function NavItems({ isModalView = false, isAdminView }) {
         {
           isAdminView ? adminNavOptions.map((item) => (<li
             className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
-            key={item.id}>
+            key={item.id}
+            onClick={()=>router.push(item.path)}
+            >
             {item.label}
           </li>))
             : navOptions.map((item) => (
               <li
                 className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
                 key={item.id}
-              //   onClick={() => router.push(item.path)}
+                 onClick={() => router.push(item.path)}
               >
                 {item.label}
               </li>
@@ -129,14 +131,14 @@ export default function Navbar() {
             </button>
 
           </div>
-          <NavItems isAdminView={isAdminView} />
+          <NavItems router={router} isAdminView={isAdminView} />
         </div>
 
 
       </nav>
       <CommonModal
         showModalTitle={false}
-        mainContent={<NavItems isModalView={true} isAdminView={isAdminView} />}
+        mainContent={<NavItems router={router} isModalView={true} isAdminView={isAdminView} />}
         show={showNavModal} setShow={setShowNavModal} />
     </>
   )
