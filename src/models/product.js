@@ -10,4 +10,8 @@ const ProductSchema = new mongoose.Schema({
     onSale: String,
     priceDrop : Number,
     imageUrl: String
-}, (timestamps : true))
+}, {timestamps : true})
+
+const Product = mongoose.models.Products || mongoose.model("Products", ProductSchema);
+
+export default Product;
