@@ -7,4 +7,7 @@ const ProductSchema = new mongoose.Schema({
     categotry: String,
     sizes: Array,
     deliveryInfo: String,
-})
+    onSale: String,
+    priceDrop : Number,
+    imageUrl: String
+}, (timestamps : true))
