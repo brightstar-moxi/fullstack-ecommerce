@@ -1,8 +1,12 @@
-
+"use client"
 
 
 
 export default function AdminAddNewProduct(){
+
+    function handleImage(){
+
+    }
 
     return(
         <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
@@ -11,7 +15,13 @@ export default function AdminAddNewProduct(){
                     <input
                     accept="image/*"
                     max= "1000000"
+                    type="file"
+                    onChange={handleImage}
                     />
+
+                    <div className="flex gap-2 flex-col">
+                        <label>Avaliable sizes</label>
+                    </div>
                 </div>
             </div>
          
