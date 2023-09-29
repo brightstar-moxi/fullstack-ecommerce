@@ -1,12 +1,14 @@
 "use client"
 
-import InputComponent from "@/components/FormElement/InputComponent"
-import SelectComponent from "@/components/FormElement/SelectComponent"
-import TileComponent from "@/components/FormElement/TileComponent"
-import { adminAddProductformControls, AvailableSizes, firebaseConfig, firebaseStroageURL } from "@/utils"
-import { initializeApp } from 'firebase/app'
+import InputComponent from "@/components/FormElement/InputComponent";
+import SelectComponent from "@/components/FormElement/SelectComponent";
+import TileComponent from "@/components/FormElement/TileComponent";
+import { adminAddProductformControls, AvailableSizes, firebaseConfig, firebaseStroageURL } from "@/utils";
+import { initializeApp } from 'firebase/app';
 import { getDownloadURL, getStorage, uploadBytesResumable, ref } from 'firebase/storage'
-import { resolve } from "styled-jsx/css"
+import { useContext, useEffect, useState } from "react";
+import { resolve } from "styled-jsx/css";
+
 
 
 const app = initializeApp(firebaseConfig);
@@ -32,11 +34,25 @@ async function helperForUPloadingImageToFirebase(file) {
             reject(error)
         }, () => {
             getDownloadURL(uploadImage.snapshot.ref).then(downloadUrl => resolve(downloadUrl)).catch(error => reject(error))
-        })
-    })
+        });
+    });
+}
+
+const initialFormData = {
+    name: '',
+    price: 0,
+    description: '',
+    category: 'men',
+    sizes: [],
+    deliveryInfo: "",
+    onSale: "no",
+    imageUrl: "",
+    priceDrop: 0,
 }
 
 export default function AdminAddNewProduct() {
+
+    const [formData, setFormData] = useState(initialFormData)
 
     async function handleImage(event) {
         console.log(event.target.files);
