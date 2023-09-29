@@ -68,7 +68,10 @@ export default function AdminAddNewProduct() {
      
     }
     function handleTileClick(getCurrentItem){
-        console.log(getCurrentItem)
+        console.log(getCurrentItem);
+
+        let cpySizes = [...formData.sizes];
+        const index = cpySizes.files
   }
     console.log(formData);
 
