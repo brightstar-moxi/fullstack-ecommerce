@@ -59,14 +59,18 @@ export default function AdminAddNewProduct() {
         const extractImageUrl = await helperForUPloadingImageToFirebase(event.target.files[0])
         console.log(extractImageUrl);
 
-        if(extractImageUrl !== '') {
-   setFormData({
-       ...formData,
-       imageUrl: extractImageUrl
-   })
+        if (extractImageUrl !== '') {
+            setFormData({
+                ...formData,
+                imageUrl: extractImageUrl
+            })
         }
+     
     }
-    console.log(formData)
+    function handleTileClick(getCurrentItem){
+        console.log(getCurrentItem)
+  }
+    console.log(formData);
 
     return (
         <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
@@ -82,7 +86,9 @@ export default function AdminAddNewProduct() {
                     <div className="flex gap-2 flex-col">
                         <label>Avaliable sizes</label>
                         <TileComponent
-                            data={AvailableSizes}
+                          selected={formData.sizes}
+                          onClick={handleTileClick}
+                          data={AvailableSizes}
                         />
                     </div>
                     {
@@ -92,12 +98,26 @@ export default function AdminAddNewProduct() {
                                     type={controlItem.type}
                                     placeholder={controlItem.placeholder}
                                     label={controlItem.label}
+                                    value={formData[controlItem.id]}
+                                    onChange={(event) => {
+                                        setFormData({
+                                            ...formData,
+                                            [controlItem.id]: event.target.value,
+                                        });
+                                    }}
                                 />
                             ) :
 
                                 controlItem.componentType === 'select' ? (<SelectComponent
                                     label={controlItem.label}
                                     options={controlItem.options}
+                                    value={formData[controlItem.id]}
+                                    onChange={(event) => {
+                                        setFormData({
+                                            ...formData,
+                                            [controlItem.id]: event.target.value,
+                                        });
+                                    }}
                                 />
                                 ) : null
                         )
