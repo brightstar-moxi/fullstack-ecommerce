@@ -29,7 +29,7 @@ async function helperForUPloadingImageToFirebase(file) {
 
 
     return new Promise((resolve, reject) => {
-        uploadImage.on('state_changed', (snapshot) => { }, (error) => {
+        uploadImage.on('state_changed', (snapshot) => {}, (error) => {
             console.log(error)
             reject(error)
         }, () => {
@@ -71,7 +71,7 @@ export default function AdminAddNewProduct() {
         console.log(getCurrentItem);
 
         let cpySizes = [...formData.sizes];
-        const index = cpySizes.files
+        const index =  cpySizes.findIndex((item) => item.id === getCurrentItem.id);
   }
     console.log(formData);
 
