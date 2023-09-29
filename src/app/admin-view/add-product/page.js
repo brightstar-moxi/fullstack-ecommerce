@@ -57,8 +57,16 @@ export default function AdminAddNewProduct() {
     async function handleImage(event) {
         console.log(event.target.files);
         const extractImageUrl = await helperForUPloadingImageToFirebase(event.target.files[0])
-        console.log(extractImageUrl)
+        console.log(extractImageUrl);
+
+        if(extractImageUrl !== '') {
+   setFormData({
+       ...formData,
+       imageUrl: extractImageUrl
+   })
+        }
     }
+    console.log(formData)
 
     return (
         <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
