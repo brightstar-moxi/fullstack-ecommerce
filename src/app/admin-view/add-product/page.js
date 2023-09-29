@@ -3,14 +3,28 @@
 import InputComponent from "@/components/FormElement/InputComponent"
 import SelectComponent from "@/components/FormElement/SelectComponent"
 import TileComponent from "@/components/FormElement/TileComponent"
-import { adminAddProductformControls, AvailableSizes } from "@/utils"
+import { adminAddProductformControls, AvailableSizes, firebaseConfig, firebaseStroageURL } from "@/utils"
+import {initializeApp} from 'firebase/app'
+import {getStorage} from 'firebase/storage'
 
 
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app, firebaseStroageURL)
+
+const createUniqueFileName= (getFile)=>{
+
+}
+
+async function helperForUPloadingImageToFirebase(files){
+
+}
 
 export default function AdminAddNewProduct() {
 
-    function handleImage() {
-
+  async function handleImage(event) {
+console.log(event.target.files);
+const extractImageUrl = await helperForUPloadingImageToFirebase(event.target.files[0])
+console.log(extractImageUrl)
     }
 
     return (
