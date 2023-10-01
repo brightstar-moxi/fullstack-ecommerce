@@ -29,7 +29,7 @@ async function helperForUPloadingImageToFirebase(file) {
 
 
     return new Promise((resolve, reject) => {
-        uploadImage.on('state_changed', (snapshot) => {}, (error) => {
+        uploadImage.on('state_changed', (snapshot) => { }, (error) => {
             console.log(error)
             reject(error)
         }, () => {
@@ -65,14 +65,25 @@ export default function AdminAddNewProduct() {
                 imageUrl: extractImageUrl
             })
         }
-     
+
     }
-    function handleTileClick(getCurrentItem){
-        console.log(getCurrentItem);
+    function handleTileClick(getCurrentItem) {
+        // console.log(getCurrentItem);
 
         let cpySizes = [...formData.sizes];
-        const index =  cpySizes.findIndex((item) => item.id === getCurrentItem.id);
-  }
+        const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
+
+        if (index === -1) {
+            cpySizes.push(getCurrentItem)
+        } else {
+            cpySizes = cpySizes.filter(item => item.id !== getCurrentItem.id)
+        }
+
+        setFormData({
+            ...formData,
+            sizes: cpySizes,
+        })
+    }
     console.log(formData);
 
     return (
@@ -89,9 +100,9 @@ export default function AdminAddNewProduct() {
                     <div className="flex gap-2 flex-col">
                         <label>Avaliable sizes</label>
                         <TileComponent
-                          selected={formData.sizes}
-                          onClick={handleTileClick}
-                          data={AvailableSizes}
+                            selected={formData.sizes}
+                            onClick={handleTileClick}
+                            data={AvailableSizes}
                         />
                     </div>
                     {
