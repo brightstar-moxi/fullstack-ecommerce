@@ -49,11 +49,14 @@ const initialFormData = {
     onSale: "no",
     imageUrl: "",
     priceDrop: 0,
-}
+};
 
 export default function AdminAddNewProduct() {
 
     const [formData, setFormData] = useState(initialFormData)
+
+    const [ componentLevelLoader,
+        setComponentLevelLoader,] = useContext(GlobalContext);
 
     async function handleImage(event) {
         console.log(event.target.files);
@@ -87,8 +90,25 @@ export default function AdminAddNewProduct() {
     }
 
     async function handleAddProduct() {
+        setComponentLevelLoader({loading : true, id :''})
+
         const res = await addNewProduct(formData);
         console.log(res);
+
+        if (res.success){
+            setComponentLevelLoader({loading : false, id :''})
+            toast.success(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            })
+
+            setFormData(initialFormData)
+        } else {
+            toast.error(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            })
+            setComponentLevelLoader({loading : false, id :''})
+            setFormData(initialFormData)
+        }
 
     }
 
@@ -148,11 +168,18 @@ export default function AdminAddNewProduct() {
                         onClick={handleAddProduct}
                         className="inline-flex w-full Items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking"
                     >
-                        Add Product
+                        {
+                            componentLevelLoader && componentLevelLoader.loading ? 
+                            <ComponentLevelLoader    
+                            text={"Adding Product"}
+                            color={"#ffffff"}
+                            loading={componentLevelLoader && componentLevelLoader.loading}/> : 'Add Product'
+                        }
+                      
                     </button>
                 </div>
             </div>
-
+              <Notification/>
         </div>
     )
 }
