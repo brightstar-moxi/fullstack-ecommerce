@@ -8,6 +8,7 @@ import { initializeApp } from 'firebase/app';
 import { getDownloadURL, getStorage, uploadBytesResumable, ref } from 'firebase/storage'
 import { useContext, useEffect, useState } from "react";
 import { resolve } from "styled-jsx/css";
+import { addNewProduct, updateAProduct } from "@/services/product";
 
 
 
@@ -82,8 +83,15 @@ export default function AdminAddNewProduct() {
         setFormData({
             ...formData,
             sizes: cpySizes,
-        })
+        });
     }
+
+    async function handleAddProduct() {
+        const res = await addNewProduct(formData);
+        console.log(res);
+
+    }
+
     console.log(formData);
 
     return (
@@ -137,6 +145,7 @@ export default function AdminAddNewProduct() {
                         )
                     }
                     <button
+                        onClick={handleAddProduct}
                         className="inline-flex w-full Items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking"
                     >
                         Add Product

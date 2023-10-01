@@ -1,5 +1,5 @@
 
-
+import Product from "@/models/product";
 import connectToDB from "@/database";
 import Joi from "joi";
 import { NextResponse } from "next/server";
@@ -8,7 +8,7 @@ const AddNewProductSchema = Joi.object({
     name: Joi.string().required(),
     description: Joi.string().required(),
     price: Joi.number().required(),
-    categotry: Joi.string().required(),
+    category: Joi.string().required(),
     sizes: Joi.array().required(),
     deliveryInfo: Joi.string().required(),
     onSale: Joi.string().required(),
@@ -29,11 +29,11 @@ export async function POST(req) {
             const extractData = await req.json()
 
             const {
-                name, description, price, imageUrl, categotry, sizes, deliveryInfo, onSale, priceDrop
+                name, description, price, imageUrl, category, sizes, deliveryInfo, onSale, priceDrop
             } = extractData;
 
             const {error} = AddNewProductSchema.validate({
-                name, description, price, imageUrl, categotry, sizes, deliveryInfo, onSale, priceDrop
+                name, description, price, imageUrl, category, sizes, deliveryInfo, onSale, priceDrop
             });
             if (error) {
   
