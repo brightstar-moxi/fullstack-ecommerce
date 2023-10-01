@@ -1,13 +1,13 @@
 "use client"
 
-import InputComponent from "@/components/FormElement/InputComponent"
+import InputComponent from "@/components/FormElement/InputComponent";
 import { GlobalContext } from "@/context";
-import { login } from "@/services/login"
-import { loginFormControls } from "@/utils"
-import Cookies from "js-cookie"
+import { login } from "@/services/login";
+import { loginFormControls } from "@/utils";
+import Cookies from "js-cookie";
 import Notification from "@/components/Notification";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 

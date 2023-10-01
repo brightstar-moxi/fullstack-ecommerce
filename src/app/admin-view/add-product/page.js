@@ -9,6 +9,9 @@ import { getDownloadURL, getStorage, uploadBytesResumable, ref } from 'firebase/
 import { useContext, useEffect, useState } from "react";
 import { resolve } from "styled-jsx/css";
 import { addNewProduct, updateAProduct } from "@/services/product";
+import { GlobalContext } from "@/context";
+import ComponentLevelLoader from "@/components/Loader/componentlevel";
+import Notification from "@/components/Notification";
 
 
 
@@ -53,10 +56,9 @@ const initialFormData = {
 
 export default function AdminAddNewProduct() {
 
-    const [formData, setFormData] = useState(initialFormData)
-
-    const [ componentLevelLoader,
-        setComponentLevelLoader,] = useContext(GlobalContext);
+    const [formData, setFormData] = useState(initialFormData);
+    const {componentLevelLoader, setComponentLevelLoader} = useContext(GlobalContext);
+    // const [componentLevelLoader, setComponentLevelLoader] = useContext(GlobalContext);
 
     async function handleImage(event) {
         console.log(event.target.files);
