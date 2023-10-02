@@ -13,6 +13,7 @@ import { GlobalContext } from "@/context";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 
 
@@ -24,7 +25,7 @@ const createUniqueFileName = (getFile) => {
     const timeStamp = Date.now();
     const randomStringValue = Math.random().toString(36).substring(2, 12);
 
-
+// `${getFile.name}-${timeStamp}-${randomStringValue}`
     return `${getFile.name}-${timeStamp}-${randomStringValue}`
 }
 
@@ -61,6 +62,8 @@ export default function AdminAddNewProduct() {
     const [formData, setFormData] = useState(initialFormData);
     const {componentLevelLoader, setComponentLevelLoader} = useContext(GlobalContext);
     // const [componentLevelLoader, setComponentLevelLoader] = useContext(GlobalContext);
+
+    const router = useRouter()
 
     async function handleImage(event) {
         console.log(event.target.files);
@@ -105,7 +108,10 @@ export default function AdminAddNewProduct() {
                 position: toast.POSITION.TOP_RIGHT
             })
 
-            setFormData(initialFormData)
+            setFormData(initialFormData);
+            setTimeout(()=>{
+                router.push('/admin-view/all-products')
+            },1000)
         } else {
             toast.error(res.message, {
                 position: toast.POSITION.TOP_RIGHT
