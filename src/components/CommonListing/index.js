@@ -1,5 +1,7 @@
 "use client"
 
+import ProductTile from "./ProductTile"
+
 const dammyData = [
     {
         
@@ -44,7 +46,7 @@ export default function CommonListing(){
                     dammyData && dammyData.length ?
                     dammyData.map(item=>
                     <article>
-
+                         <ProductTile/>
                     </article>) : null
                 }
             </div>
