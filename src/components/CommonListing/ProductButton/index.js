@@ -1,6 +1,10 @@
 "use client"
-import CommonListing from "@/components/CommonListing";
+// import CommonListing from "@/components/CommonListing";
 export default function ProductButton(){
 
-    return   <CommonListing/>
+    return (
+          <div>product button
+
+          </div>
+    );
 }

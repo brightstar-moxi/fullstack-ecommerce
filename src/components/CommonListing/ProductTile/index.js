@@ -1,6 +1,6 @@
 "use client"
 
-export default function ProductTile(item) {
+export default function ProductTile({item}) {
 
     return (
     <div>
@@ -14,7 +14,7 @@ export default function ProductTile(item) {
         {
             item.onScale === 'yes' ?
                 <div className="absolute top-0 m-2 rounded-full bg-black">
-                    <p className="rounded-full bg-black p-1 text-[8px] font-bold uppercase trackinig-wide text-white sm:py-1 sm:px-3">
+                    <p className="rounded-full p-1 text-[8px] font-bold uppercase trackinig-wide text-white sm:py-1 sm:px-3">
                         sale
                     </p>
                 </div>

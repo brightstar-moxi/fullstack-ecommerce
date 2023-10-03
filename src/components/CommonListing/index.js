@@ -79,11 +79,12 @@ export default function CommonListing(){
             <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16">
                 {
                     dammyData && dammyData.length ?
-                    dammyData.map(item=>
-                    <article key={item._id}>
+                    dammyData.map((item) => (
+                    <article className="relative flex flex-col overflow-hidden border cursor-pointer" key={item._id}>
                          <ProductTile item={item}/>
                          <ProductButton item={item}/>
-                    </article>) : null
+                    </article>
+                    )) : null
                 }
             </div>
         </div>
