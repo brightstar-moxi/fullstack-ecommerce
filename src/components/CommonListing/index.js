@@ -1,5 +1,6 @@
 "use client"
 
+import ProductButton from "./ProductButton"
 import ProductTile from "./ProductTile"
 
 const dammyData = [
@@ -45,8 +46,9 @@ export default function CommonListing(){
                 {
                     dammyData && dammyData.length ?
                     dammyData.map(item=>
-                    <article>
-                         <ProductTile/>
+                    <article key={item._id}>
+                         <ProductTile item={item}/>
+                         <ProductButton item={item}/>
                     </article>) : null
                 }
             </div>
