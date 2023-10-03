@@ -1,6 +1,6 @@
 "use client"
-
+import CommonListing from "@/components/CommonListing";
 export default function ProductButton(){
 
-    return <div>Product Button</div>
+    return   <CommonListing/>
 }
