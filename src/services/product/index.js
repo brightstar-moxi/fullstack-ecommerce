@@ -5,15 +5,15 @@
 
 import Cookies from "js-cookie"
 
-export const addNewProduct = async (formData)=>{
+export const addNewProduct = async (formData) => {
     try {
         const response = await fetch('/api/admin/add-product', {
-            method : "POST",
-            headers:{
-                'content-type' : 'application/json',
-                Authorization : `Bearer ${Cookies.get('token')}`
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${Cookies.get('token')}`
             },
-            body : JSON.stringify(formData)
+            body: JSON.stringify(formData)
         })
 
         const data = await response.json();
@@ -23,18 +23,38 @@ export const addNewProduct = async (formData)=>{
     }
 }
 
-export const getAllAdminProducts = async()=>{
+export const getAllAdminProducts = async () => {
 
-    try{
+    try {
         const res = await fetch('http://localhost:3000/api/admin/all-products', {
-            method : 'GET',
-            cache : 'no-store'
+            method: 'GET',
+            cache: 'no-store'
         })
 
         const data = await res.json()
 
         return data;
-    }catch(error){
+    } catch (error) {
         console.log(error)
     }
+};
+
+
+export const updatedProduct = async (formData) => {
+    try {
+        const res = await fetch('/api/admin/update-product', {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${Cookies.get('token')}`
+            },
+            body: JSON.stringify(formData)
+        })
+
+        const data = await res.json()
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
 }
+

@@ -25,9 +25,14 @@ export async function POST(req) {
         );
         if(updatedProduct){
             return NextResponse.json({
+                success : true,
+                message: "Product updated successfully"
+            });
+        }else{
+            return NextResponse.json({
                 success : false,
-                message: "something went wrong ! Please try again later"
-            })
+                message: "Failed to upload the product ! Please try again later"
+            });
         }
 
     } catch (e) {
