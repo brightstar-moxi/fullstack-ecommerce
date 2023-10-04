@@ -1,14 +1,29 @@
 "use client"
-import {usePathName} from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
+export default function ProductButton() {
+    const pathName = usePathname();
 
-export default function ProductButton(){
-const pathName = usePathName()
+    const isAdminView = pathName.includes("admin-view");
 
-    const isAdminView = pathName.includes("admin-view")
-    return (
-          <div>
-              product button
-               </div>
-    );
+    return isAdminView ? (
+        <>
+            <button
+                className="mt-1.5 flex w-full justify-center bg-black px-5 py-1 text-xs font-medium uppercase tracking-wide text-white"
+            >
+                Update
+            </button>
+            <button
+                className="mt-1.5 flex w-full justify-center bg-black px-5 py-1 text-xs font-medium uppercase tracking-wide text-white"
+            >Delete</button>
+        </>
+    ) : (
+        <>
+            <button
+                className="mt-1.5 flex w-full justify-center bg-black px-5 py-1 text-xs font-medium uppercase tracking-wide text-white"
+            >Add to Cart</button>
+
+        </>
+    )
+
 }
