@@ -1,9 +1,13 @@
- import CommonListing from "@/components/CommonListing";
+import CommonListing from "@/components/CommonListing";
+import { getAllAdminProducts } from '@/services/product';
 
 
 
+export default async function AdminAllProducts() {
 
-export default function AdminAllProducts(){
+    const allAdminProducts = await getAllAdminProducts()
 
-    return <CommonListing/>
+    console.log(allAdminProducts);
+
+    return <CommonListing />
 }
