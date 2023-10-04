@@ -9,5 +9,5 @@ export default async function AdminAllProducts() {
 
     console.log(allAdminProducts);
 
-    return <CommonListing />
+    return <CommonListing data={allAdminProducts && allAdminProducts.data}/>
 }
