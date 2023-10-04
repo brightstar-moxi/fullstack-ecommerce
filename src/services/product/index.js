@@ -27,7 +27,8 @@ export const getAllAdminProducts = async()=>{
 
     try{
         const res = await fetch('http://localhost:3000/api/admin/all-products', {
-            method : 'GET'
+            method : 'GET',
+            cache : 'no-store'
         })
 
         const data = await res.json()
