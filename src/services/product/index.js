@@ -58,11 +58,11 @@ export const updatedProduct = async (formData) => {
     }
 };
 
-export const deleteProduct = async(id)=>{
+export const deleteProduct = async (id) => {
     try {
-        
+
         const res = await fetch(`/api/admin/delete-product?id=${id}`, {
-            method : 'DELETE',
+            method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${Cookies.get('token')}`
             }
@@ -72,7 +72,7 @@ export const deleteProduct = async(id)=>{
 
         return data;
     } catch (error) {
-        
+
     }
 }
 

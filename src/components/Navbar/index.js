@@ -3,7 +3,7 @@
 import { GlobalContext } from "@/context";
 import { adminNavOptions, navOptions } from "@/utils";
 import { usePathname, useRouter } from "next/navigation";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import CommonModal from "../CommonModal";
 import Cookies from "js-cookie";
 
@@ -26,15 +26,15 @@ function NavItems({ isModalView = false, isAdminView, router }) {
           isAdminView ? adminNavOptions.map((item) => (<li
             className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
             key={item.id}
-            onClick={()=>router.push(item.path)}
-            >
+            onClick={() => router.push(item.path)}
+          >
             {item.label}
           </li>))
             : navOptions.map((item) => (
               <li
                 className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
                 key={item.id}
-                 onClick={() => router.push(item.path)}
+                onClick={() => router.push(item.path)}
               >
                 {item.label}
               </li>
@@ -60,7 +60,16 @@ export default function Navbar() {
   const pathName = usePathname();
   const router = useRouter()
 
-  console.log(pathName)
+  console.log( currentUpdatedProduct, 'navbar')
+
+  useEffect(() => {
+
+    if(
+      pathName !== '/admin-view/add-product' &&
+      currentUpdatedProduct !== null
+    )
+    setCurrentUpdatedProduct(null);
+  }, [pathName,])
 
   function handleLogout() {
     setIsAuthUser(false)
@@ -75,7 +84,7 @@ export default function Navbar() {
     <>
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <div onClick={()=>router.push('/')} className="flex items-center cursor-pointer">
+          <div onClick={() => router.push('/')} className="flex items-center cursor-pointer">
             <span className="slef-center text-2xl font-semibold whitespace-nowrap">
               Brightstar-Ecommerce
             </span>

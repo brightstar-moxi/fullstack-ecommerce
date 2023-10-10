@@ -60,8 +60,15 @@ const initialFormData = {
 export default function AdminAddNewProduct() {
 
     const [formData, setFormData] = useState(initialFormData);
-    const {componentLevelLoader, setComponentLevelLoader} = useContext(GlobalContext);
+    const {componentLevelLoader, setComponentLevelLoader, currentUpdatedProduct, setCurrentUpdateProduct} = useContext(GlobalContext);
     // const [componentLevelLoader, setComponentLevelLoader] = useContext(GlobalContext);
+
+console.log(currentUpdatedProduct);
+
+useEffect(()=>{
+
+    if (currentUpdatedProduct !== null) setFormData()
+},[currentUpdatedProduct])
 
     const router = useRouter()
 
