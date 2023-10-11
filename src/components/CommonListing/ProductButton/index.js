@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 
 
-export default function ProductButton(item) {
+export default function ProductButton({item}) {
     const pathName = usePathname();
 
     
