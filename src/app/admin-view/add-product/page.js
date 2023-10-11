@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 
 
 const app = initializeApp(firebaseConfig);
-const storage = getStorage(app, firebaseStroageURL)
+const storage = getStorage(app, firebaseStroageURL);
 
 const createUniqueFileName = (getFile) => {
     const timeStamp = Date.now();
@@ -36,10 +36,11 @@ async function helperForUPloadingImageToFirebase(file) {
 
 
     return new Promise((resolve, reject) => {
-        uploadImage.on('state_changed', (snapshot) => { }, (error) => {
+        uploadImage.on('state_changed', (snapshot) => {}, (error) => {
             console.log(error)
             reject(error)
-        }, () => {
+        }, 
+        () => {
             getDownloadURL(uploadImage.snapshot.ref).then(downloadUrl => resolve(downloadUrl)).catch(error => reject(error))
         });
     });
@@ -60,28 +61,30 @@ const initialFormData = {
 export default function AdminAddNewProduct() {
 
     const [formData, setFormData] = useState(initialFormData);
-    const {componentLevelLoader, setComponentLevelLoader, currentUpdatedProduct, setCurrentUpdateProduct} = useContext(GlobalContext);
+    const {componentLevelLoader, setComponentLevelLoader, currentUpdatedProduct, setCurrentUpdatedProduct} = useContext(GlobalContext);
     // const [componentLevelLoader, setComponentLevelLoader] = useContext(GlobalContext);
 
 console.log(currentUpdatedProduct);
 
+const router = useRouter();
+
 useEffect(()=>{
 
-    if (currentUpdatedProduct !== null) setFormData()
+    if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct)
 },[currentUpdatedProduct])
 
-    const router = useRouter()
+   
 
     async function handleImage(event) {
         console.log(event.target.files);
-        const extractImageUrl = await helperForUPloadingImageToFirebase(event.target.files[0])
+        const extractImageUrl = await helperForUPloadingImageToFirebase(event.target.files[0]);
         console.log(extractImageUrl);
 
-        if (extractImageUrl !== '') {
+        if (extractImageUrl !== "") {
             setFormData({
                 ...formData,
                 imageUrl: extractImageUrl
-            })
+            });
         }
 
     }
@@ -92,9 +95,9 @@ useEffect(()=>{
         const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
 
         if (index === -1) {
-            cpySizes.push(getCurrentItem)
+            cpySizes.push(getCurrentItem);
         } else {
-            cpySizes = cpySizes.filter(item => item.id !== getCurrentItem.id)
+            cpySizes = cpySizes.filter((item) => item.id !== getCurrentItem.id);
         }
 
         setFormData({
