@@ -124,6 +124,7 @@ export default function AdminAddNewProduct() {
           });
 
             setFormData(initialFormData);
+            setCurrentUpdatedProduct(null);
             setTimeout(() => {
                 router.push('/admin-view/all-products')
             }, 1000)
@@ -194,11 +195,16 @@ export default function AdminAddNewProduct() {
                         className="inline-flex w-full Items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking"
                     >
                         {
-                            componentLevelLoader && componentLevelLoader.loading ?
+                            componentLevelLoader && componentLevelLoader.loading ? (
                                 <ComponentLevelLoader
                                     text={"Adding Product"}
                                     color={"#ffffff"}
-                                    loading={componentLevelLoader && componentLevelLoader.loading} /> : 'Add Product'
+                                    loading={componentLevelLoader && componentLevelLoader.loading} /> ):
+                                        currentUpdatedProduct !== null ? (
+                                            "Update Product"
+                                        ):(
+                                        'Add Product'
+                                    )
                         }
 
                     </button>

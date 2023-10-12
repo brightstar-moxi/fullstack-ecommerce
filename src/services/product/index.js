@@ -49,7 +49,7 @@ export const updatedProduct = async (formData) => {
                 Authorization: `Bearer ${Cookies.get('token')}`
             },
             body: JSON.stringify(formData)
-        })
+        });
 
         const data = await res.json()
         return data;
