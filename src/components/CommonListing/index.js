@@ -1,5 +1,7 @@
 "use client"
 
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import ProductButton from "./ProductButton"
 import ProductTile from "./ProductTile"
 
@@ -70,6 +72,12 @@ import ProductTile from "./ProductTile"
 
 export default function CommonListing({data}){
 
+
+    const router = useRouter();
+
+    useEffect(()=>{
+        router.refresh();
+    },[])
 
     return (
     <section

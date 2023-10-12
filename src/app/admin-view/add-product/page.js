@@ -8,7 +8,7 @@ import { initializeApp } from 'firebase/app';
 import { getDownloadURL, getStorage, uploadBytesResumable, ref } from 'firebase/storage'
 import { useContext, useEffect, useState } from "react";
 import { resolve } from "styled-jsx/css";
-import { addNewProduct, updateAProduct } from "@/services/product";
+import { addNewProduct, updatedProduct } from "@/services/product";
 import { GlobalContext } from "@/context";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
@@ -25,7 +25,7 @@ const createUniqueFileName = (getFile) => {
     const timeStamp = Date.now();
     const randomStringValue = Math.random().toString(36).substring(2, 12);
 
-// `${getFile.name}-${timeStamp}-${randomStringValue}`
+    // `${getFile.name}-${timeStamp}-${randomStringValue}`
     return `${getFile.name}-${timeStamp}-${randomStringValue}`
 }
 
@@ -36,13 +36,13 @@ async function helperForUPloadingImageToFirebase(file) {
 
 
     return new Promise((resolve, reject) => {
-        uploadImage.on('state_changed', (snapshot) => {}, (error) => {
+        uploadImage.on('state_changed', (snapshot) => { }, (error) => {
             console.log(error)
             reject(error)
-        }, 
-        () => {
-            getDownloadURL(uploadImage.snapshot.ref).then(downloadUrl => resolve(downloadUrl)).catch(error => reject(error))
-        });
+        },
+            () => {
+                getDownloadURL(uploadImage.snapshot.ref).then(downloadUrl => resolve(downloadUrl)).catch(error => reject(error))
+            });
     });
 }
 
@@ -61,19 +61,19 @@ const initialFormData = {
 export default function AdminAddNewProduct() {
 
     const [formData, setFormData] = useState(initialFormData);
-    const {componentLevelLoader, setComponentLevelLoader, currentUpdatedProduct, setCurrentUpdatedProduct} = useContext(GlobalContext);
+    const { componentLevelLoader, setComponentLevelLoader, currentUpdatedProduct, setCurrentUpdatedProduct } = useContext(GlobalContext);
     // const [componentLevelLoader, setComponentLevelLoader] = useContext(GlobalContext);
 
-console.log(currentUpdatedProduct);
+    console.log(currentUpdatedProduct);
 
-const router = useRouter();
+    const router = useRouter();
 
-useEffect(()=>{
+    useEffect(() => {
 
-    if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct)
-},[currentUpdatedProduct])
+        if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct)
+    }, [currentUpdatedProduct])
 
-   
+
 
     async function handleImage(event) {
         console.log(event.target.files);
@@ -107,26 +107,31 @@ useEffect(()=>{
     }
 
     async function handleAddProduct() {
-        setComponentLevelLoader({loading : true, id :''})
-
-        const res = await addNewProduct(formData);
-        console.log(res);
-
-        if (res.success){
-            setComponentLevelLoader({loading : false, id :''})
-            toast.success(res.message, {
-                position: toast.POSITION.TOP_RIGHT
-            })
+        setComponentLevelLoader({ loading: true, id: "" });
+        // const res =
+        //   currentUpdatedProduct !== null
+        //     ? await updatedProduct(formData)
+        //     : await addNewProduct(formData);
+          const res = await updatedProduct(formData);
+        // console.log(res);
+    
+  
+      console.log(res);
+        if (res.success) {
+          setComponentLevelLoader({ loading: false, id: "" });
+          toast.success(res.message, {
+            position: toast.POSITION.TOP_RIGHT,
+          });
 
             setFormData(initialFormData);
-            setTimeout(()=>{
+            setTimeout(() => {
                 router.push('/admin-view/all-products')
-            },1000)
+            }, 1000)
         } else {
             toast.error(res.message, {
                 position: toast.POSITION.TOP_RIGHT
             })
-            setComponentLevelLoader({loading : false, id :''})
+            setComponentLevelLoader({ loading: false, id: '' })
             setFormData(initialFormData)
         }
 
@@ -189,17 +194,17 @@ useEffect(()=>{
                         className="inline-flex w-full Items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking"
                     >
                         {
-                            componentLevelLoader && componentLevelLoader.loading ? 
-                            <ComponentLevelLoader    
-                            text={"Adding Product"}
-                            color={"#ffffff"}
-                            loading={componentLevelLoader && componentLevelLoader.loading}/> : 'Add Product'
+                            componentLevelLoader && componentLevelLoader.loading ?
+                                <ComponentLevelLoader
+                                    text={"Adding Product"}
+                                    color={"#ffffff"}
+                                    loading={componentLevelLoader && componentLevelLoader.loading} /> : 'Add Product'
                         }
-                      
+
                     </button>
                 </div>
             </div>
-              <Notification/>
+            <Notification />
         </div>
     )
 }

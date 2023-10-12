@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
 import connectToDB from "@/database";
+import Product from "@/models/product";
+
 
 export const dynamic = "force-dynamic";
 
-export async function POST(req) {
+export async function PUT(req) {
     try {
         await connectToDB();
+
         const extractData = await req.json();
 
         const {
@@ -28,6 +31,7 @@ export async function POST(req) {
                 success : true,
                 message: "Product updated successfully"
             });
+            
         }else{
             return NextResponse.json({
                 success : false,
