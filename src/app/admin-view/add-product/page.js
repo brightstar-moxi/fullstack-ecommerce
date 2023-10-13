@@ -108,12 +108,12 @@ export default function AdminAddNewProduct() {
 
     async function handleAddProduct() {
         setComponentLevelLoader({ loading: true, id: "" });
-        // const res =
-        //   currentUpdatedProduct !== null
-        //     ? await updatedProduct(formData)
-        //     : await addNewProduct(formData);
-          const res = await updatedProduct(formData);
-        // console.log(res);
+        const res =
+          currentUpdatedProduct !== null
+            ? await updatedProduct(formData)
+            : await addNewProduct(formData);
+        //   const res = await updatedProduct(formData);
+         console.log(res);
     
   
       console.log(res);

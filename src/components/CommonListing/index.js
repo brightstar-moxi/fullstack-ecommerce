@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Notification from "../Notification";
 import ProductButton from "./ProductButton"
 import ProductTile from "./ProductTile"
 
@@ -96,7 +97,7 @@ export default function CommonListing({data}){
                 }
             </div>
         </div>
-
+  <Notification/>
     </section>
     );
 }
