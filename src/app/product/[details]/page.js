@@ -1,7 +1,11 @@
+import { productById } from "@/services/product"
 
 
 
-export default async function ProductDetails(){
+export default async function ProductDetails({params}){
 
-    return
+    const productDetailsData = await productById(params.details)
+
+    console.log(productDetailsData);
+    return <div>Details</div>
 }

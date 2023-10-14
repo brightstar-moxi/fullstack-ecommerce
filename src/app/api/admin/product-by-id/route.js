@@ -5,13 +5,13 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export default function GET(req){
+export async function GET(req){
 try {
     await connectToDB();
-    const {searchParam} = new URL(req.url);
-    const productId = searchParam.get('id');
+    const {searchParams} = new URL(req.url);
+    const productId = searchParams.get("id");
 
-    if(productId){
+    if(!productId){
         return NextResponse.json({
             success : false,
             status : 400,
