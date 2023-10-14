@@ -72,7 +72,7 @@ export const deleteProduct = async (id) => {
 
         return data;
     } catch (error) {
-
+         console.log(error);
     }
 }
 
@@ -87,7 +87,21 @@ export const productByCategory = async (id) => {
         const data = await res.json();
 
         return data;
-    } catch (error) {
+    } catch (e) {
         console.log(e);
+    }
+}
+
+export const productById = async(id)=>{
+    try {
+        const res = await fetch(`http://localhost:3000/api/admin/product-by-category?id=${id}`,{
+            method: 'GET',
+            cache: 'no-store'
+        })
+        const data = await res.json()
+
+        return data;
+    } catch (error) {
+        console.log(error);
     }
 }
