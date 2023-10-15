@@ -24,13 +24,13 @@ export async function POST(req) {
     try {
         await connectToDB();
 
-        const user = 'admin';
+        // const user = 'admin';
         
         const isAuthUser = await AuthUser(req)
 
-        console.log(isAuthUser);
+        console.log(isAuthUser, "brightstar-admin");
 
-        if (user === 'admin') {
+        if (isAuthUser?.role === 'admin') {
             const extractData = await req.json()
 
             const {
