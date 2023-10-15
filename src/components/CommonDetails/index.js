@@ -42,12 +42,49 @@ export default function CommonDetails({ item }) {
                             </div>
                         </div>
                     </div>
-                    <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
+                   
+
+                </div>
+                <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
                         <h1
                         className="text-2x1 font-bold text-gray-900"
                         >{item && item.name}</h1>
+                                            <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
+                        <div className="flex items-end">
+                            <h1 className="text-3xl font-bold">${item && item.price}</h1>
+                        </div>
+                        <button 
+                        type="button"
+                        className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white"
+                        >
+                            Add to Cart
+                        </button>
                     </div>
-                </div>
+                    <ul className="mt-8 space-y-2">
+                      <li className="flex items-center text-left text-sm font-medium text-gray-600">
+                {item && item.deliveryInfo}
+              </li>
+                <li className="flex items-center text-left text-sm font-medium text-gray-600">
+                {"Cancel anytime"}
+              </li>
+              </ul>
+               <div className="lg:col-span-3">
+              <div className="border-b border-gray-400">
+                <nav className="flex gap-4">
+                  <a
+                    href="#"
+                    className="border-b-2 border-gray-900 py-4 text-sm font-medium text-gray-900"
+                  >
+                    Description
+                  </a>
+                </nav>
+              </div>
+</div>
+               <div className="mt-8 flow-root sm:mt-12">
+                {item && item.description}
+              </div>
+                    </div>
+
             </div>
         </div>
     </section>
