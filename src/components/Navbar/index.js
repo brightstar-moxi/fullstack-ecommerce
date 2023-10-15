@@ -60,15 +60,15 @@ export default function Navbar() {
   const pathName = usePathname();
   const router = useRouter()
 
-  console.log( currentUpdatedProduct, 'navbar')
+  console.log(currentUpdatedProduct, 'navbar')
 
   useEffect(() => {
 
-    if(
+    if (
       pathName !== '/admin-view/add-product' &&
       currentUpdatedProduct !== null
     )
-    setCurrentUpdatedProduct(null);
+      setCurrentUpdatedProduct(null);
   }, [pathName,])
 
   function handleLogout() {
