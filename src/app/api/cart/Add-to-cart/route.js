@@ -3,10 +3,11 @@ import connectToDB from "@/database";
 
 import AuthUser from "@/middleware/AuthUser";
 import Cart from "@/models/cart";
+import Joi from "joi";
 
 const AddToCart = Joi.object({
-    userID : Joi.string().reqired(),
-    productID : Joi.string().reqired()
+    userID : Joi.string().required(),
+    productID : Joi.string().required()
 })
 
 export const dynamic = "force-dynamic";
@@ -35,7 +36,7 @@ export async function POST (req){
                 userID : userID
             })
 
-            if(isCurrentCartItemAlreadyExits){
+            if(isCurrentCartItemAlreadyExits?.length > 0){
                   return NextResponse.json({
             success: false,
             message: "Product is already added in cart! Please add different Product",
@@ -46,7 +47,7 @@ export async function POST (req){
 
             if(saveProductToCart){
                   return NextResponse.json({
-            success: false,
+            success: true,
             message: "Product is added to cart",
         });
             }else{
