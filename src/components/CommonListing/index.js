@@ -90,9 +90,7 @@ export default function CommonListing({data}){
                    data && data.length ?
                    data.map((item) => (
                     <article className="relative flex flex-col overflow-hidden border cursor-pointer" 
-                    key={item._id}
-                    onClick={()=> router.push(`/product/${item._id}`)}
-                    >
+                    key={item._id}>
                          <ProductTile item={item}/>
                          <ProductButton item={item}/>
                     </article>
