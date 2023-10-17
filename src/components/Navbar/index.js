@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useContext, useEffect } from "react";
 import CommonModal from "../CommonModal";
 import Cookies from "js-cookie";
+import CartModal from "../CartModal";
 
 // const isAdminView = false;
 
@@ -149,6 +150,10 @@ export default function Navbar() {
         showModalTitle={false}
         mainContent={<NavItems router={router} isModalView={true} isAdminView={isAdminView} />}
         show={showNavModal} setShow={setShowNavModal} />
+
+        {
+          showCartModal && <CartModal/>
+        }
     </>
   )
 }
