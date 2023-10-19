@@ -1,43 +1,43 @@
-// 'use client'
+'use client'
 
-// import { Fragment, useContext, useEffect } from "react";
-// import CommonModal from "../CommonModal";
-// import { GlobalContext } from "@/context";
-// import { getAllCartItems } from "@/services/cart";
+import { Fragment, useContext, useEffect } from "react";
+import CommonModal from "../CommonModal";
+import { GlobalContext } from "@/context";
+import { getAllCartItems } from "@/services/cart";
 
 
 
-// export default function CartModal() {
+export default function CartModal() {
 
-//     const {
-//         showCartModal, setShowCartModal, user
-//     } = useContext(GlobalContext);
+    const {
+        showCartModal, setShowCartModal, user
+    } = useContext(GlobalContext);
 
-//     async function extractAllCartItems(){
-//         const res = await getAllCartItems(user?._id)
+    // async function extractAllCartItems() {
+    //     const res = await getAllCartItems(user?._id)
 
-//         console.log(res);
-//     }
+    //     console.log(res);
+    // }
 
-// useEffect(()=>{
-//  if(user !== null) extractAllCartItems()
-// }, [user])
+    // useEffect(() => {
+    //     if (user !== null) extractAllCartItems()
+    // }, [user])
 
-//     return (
-//         <CommonModal
-//             showButtons={true}
-//             show={showCartModal}
-//             setShow={setShowCartModal}
-//             buttonComponent={
-//                 <Fragment>
-//                     <button>
-//                         Go To Cart
-//                     </button>
-//                     <button>
-//                         Checkout
-//                     </button>
-//                 </Fragment>
-//             }
-//         />
-//     )
-// }
+    return (
+        <CommonModal
+            showButtons={true}
+            show={showCartModal}
+            setShow={setShowCartModal}
+            buttonComponent={
+                <Fragment>
+                    <button>
+                        Go To Cart
+                    </button>
+                    <button>
+                        Checkout
+                    </button>
+                </Fragment>
+            }
+        />
+    )
+}

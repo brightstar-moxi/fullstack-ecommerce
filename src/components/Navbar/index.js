@@ -151,9 +151,9 @@ export default function Navbar() {
         mainContent={<NavItems router={router} isModalView={true} isAdminView={isAdminView} />}
         show={showNavModal} setShow={setShowNavModal} />
 
-        {/* {
+        {
           showCartModal && <CartModal/>
-        } */}
+        }
     </>
   )
 }
