@@ -72,14 +72,25 @@ export const navOptions = [
       label: "Role",
       componentType: "select",
       options: [
-        {
-          id: "admin",
-          label: "Admin",
-        },
+      
         {
           id: "customer",
           label: "customer",
         },
+      ],
+    },
+    {
+      id: "role",
+      type: "",
+      placeholder: "",
+      label: "Role",
+      componentType: "sel",
+      options: [
+        {
+          id: "admin",
+          label: "Admin",
+        },
+      
       ],
     },
   ];

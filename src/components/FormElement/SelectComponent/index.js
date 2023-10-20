@@ -8,7 +8,8 @@ export default function SelectComponent({ label, value, onChange, options = [] }
                 {label}
             </p>
             <select value={value}
-                onChange={onChange}
+               
+               
                 className="border placeholder-blue-400 focus:outline-none focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mr-0 mt-0 ml-0 text-base block bg-white border-blue-300 rounded-md"
             >
                 {

@@ -17,7 +17,7 @@ const initialFormData = {
     name: "",
     email: "",
     password: "",
-    role: "customer"
+    role: "admin"
 }
 
 export default function Register() {
@@ -96,7 +96,7 @@ export default function Register() {
                                                     }}
                                                     value={formData[controlItem.id]}
                                                 />) :
-                                                controlItem.componentType === 'select' ? (<SelectComponent
+                                                controlItem.componentType === 'sel' ? (<SelectComponent
                                                     options={controlItem.options}
                                                     label={controlItem.label}
                                                     onChange={(event) => {
