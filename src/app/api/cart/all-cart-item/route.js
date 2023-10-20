@@ -18,7 +18,7 @@ export async function GET(req) {
       if (!id)
         return NextResponse.json({
           success: false,
-          message: "Please login in!",
+          message: "Please login !",
         });
       const extractAllCartItems = await Cart.find({ userID: id }).populate(
         "productID"

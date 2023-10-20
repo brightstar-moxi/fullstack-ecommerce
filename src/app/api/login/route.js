@@ -62,10 +62,10 @@ export async function POST(req) {
         role: checkUser.role,
       },
     };
-
+   
     return NextResponse.json({
       success: true,
-      message: "Login successfull!",
+      message: 'Login successfull !',
       finalData,
     });
   } catch (e) {

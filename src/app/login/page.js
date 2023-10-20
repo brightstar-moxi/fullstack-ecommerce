@@ -59,7 +59,7 @@ async function handleLogin(){
             position: toast.POSITION.TOP_RIGHT,
           });
         setIsAuthUser(false);
-        setComponentLevelLoader({loading : true, id : ""})
+        setComponentLevelLoader({loading : false, id : ""})
     }
 }
 
@@ -85,8 +85,9 @@ async function handleLogin(){
 console.log(isAuthUser, user)
 
 useEffect(()=>{
-if (isAuthUser) router.push("/");
-}, [isAuthUser])
+if (isAuthUser) router.push("/client-view") ;
+}
+, [isAuthUser])
 
     return (
         <div className="bg-white relative">

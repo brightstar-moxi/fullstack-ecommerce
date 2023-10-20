@@ -66,20 +66,20 @@ export default function CartModal() {
                                             <div className="flex justify-between text-base font-meduim text-gray-900">
                                                 <h3>
                                                     <a>{
-                                                cartItem &&
-                                                cartItem.productID &&
-                                                cartItem.productID.name
-                                            }</a>
+                                                        cartItem &&
+                                                        cartItem.productID &&
+                                                        cartItem.productID.name
+                                                    }</a>
                                                 </h3>
-                                              
+
                                             </div>
-                                            <p  className="mt-1 text-sm text-gray-600">
+                                            <p className="mt-1 text-sm text-gray-600">
                                                 ${
-                                                cartItem &&
-                                                cartItem.productID &&
-                                                cartItem.productID.price
-                                            }
-                                                </p>
+                                                    cartItem &&
+                                                    cartItem.productID &&
+                                                    cartItem.productID.price
+                                                }
+                                            </p>
                                         </div>
                                         <div className="flex flex-1 items-end justify-between text-sm">
                                             <button type="button" className="font-medium text-yellow-600 sm:order-2">
@@ -95,12 +95,27 @@ export default function CartModal() {
             }
             buttonComponent={
                 <Fragment>
-                    <button>
+                    <button
+                        type="button"
+                        className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                    >
                         Go To Cart
                     </button>
-                    <button>
+                    <button
+                    disabled={cartItems && cartItems.length === 0}
+                        type="button"
+                        className="mt-1.5 w-full inline-block bg-green-500 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
+                    >
                         Checkout
                     </button>
+                    <div className="mt-6 flex justify-center text-center text-sm text-gray-600  ">
+                       <button
+                       type="button"
+                       className="font-medium text-blue-500"
+                       >
+                        Continue Shopping
+                       </button>
+                    </div>
                 </Fragment>
             }
         />
