@@ -35,7 +35,18 @@ export default function CartModal() {
 
     useEffect(() => {
         if (user !== null) extractAllCartItems()
-    }, [user])
+    }, [user]);
+
+    async function handleDeleteCartItem(getCartItemID){
+            setComponentLevelLoader({loading : true, id: getCartItemID})
+            const res = await deleteFromCart(getCartItemID)
+
+            if(res.success){
+                setComponentLevelLoader({loading : false, id: ''})
+            }else{
+                setComponentLevelLoader({loading : false, id: getCartItemID})
+            }
+    }
 
     return (
         <CommonModal
@@ -82,7 +93,9 @@ export default function CartModal() {
                                             </p>
                                         </div>
                                         <div className="flex flex-1 items-end justify-between text-sm">
-                                            <button type="button" className="font-medium text-yellow-600 sm:order-2">
+                                            <button type="button" className="font-medium text-yellow-600 sm:order-2" 
+                                            onClick={()=> handleDeleteCartItem(cartItem._id)}
+                                            >
                                                 Remove
                                             </button>
                                         </div>
@@ -104,7 +117,7 @@ export default function CartModal() {
                     <button
                     disabled={cartItems && cartItems.length === 0}
                         type="button"
-                        className="mt-1.5 w-full inline-block bg-green-500 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
+                        className="mt-1.5 w-full inline-block bg-pink-600 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
                     >
                         Checkout
                     </button>
@@ -114,6 +127,7 @@ export default function CartModal() {
                        className="font-medium text-blue-500"
                        >
                         Continue Shopping
+                        <span aria-hidden="true"> &rarr;</span>
                        </button>
                     </div>
                 </Fragment>
