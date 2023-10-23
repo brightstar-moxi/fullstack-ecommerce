@@ -37,15 +37,22 @@ export default function CartModal() {
         if (user !== null) extractAllCartItems()
     }, [user]);
 
-    async function handleDeleteCartItem(getCartItemID){
-            setComponentLevelLoader({loading : true, id: getCartItemID})
-            const res = await deleteFromCart(getCartItemID)
+    async function handleDeleteCartItem(getCartItemID) {
+        setComponentLevelLoader({ loading: true, id: getCartItemID })
+        const res = await deleteFromCart(getCartItemID)
 
-            if(res.success){
-                setComponentLevelLoader({loading : false, id: ''})
-            }else{
-                setComponentLevelLoader({loading : false, id: getCartItemID})
-            }
+        if (res.success) {
+            setComponentLevelLoader({ loading: false, id: '' })
+            toast.success(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            extractAllCartItems();
+        } else {
+            toast.error(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            setComponentLevelLoader({ loading: false, id: getCartItemID })
+        }
     }
 
     return (
@@ -93,10 +100,21 @@ export default function CartModal() {
                                             </p>
                                         </div>
                                         <div className="flex flex-1 items-end justify-between text-sm">
-                                            <button type="button" className="font-medium text-yellow-600 sm:order-2" 
-                                            onClick={()=> handleDeleteCartItem(cartItem._id)}
+                                            <button type="button" className="font-medium text-yellow-600 sm:order-2"
+                                                onClick={() => handleDeleteCartItem(cartItem._id)}
                                             >
-                                                Remove
+                                               {
+                                                componentLevelLoader && componentLevelLoader.loading
+                                                && componentLevelLoader.id === cartItem._id ?
+
+                                                <ComponentLevelLoader
+                                                text={"Removing"}
+                                                color={"#000000"}
+                                                loading={
+                                                    componentLevelLoader && componentLevelLoader.loading
+                                                }
+                                                /> : "Remove"
+                                               }
                                             </button>
                                         </div>
                                     </div>
@@ -115,20 +133,20 @@ export default function CartModal() {
                         Go To Cart
                     </button>
                     <button
-                    disabled={cartItems && cartItems.length === 0}
+                        disabled={cartItems && cartItems.length === 0}
                         type="button"
                         className="mt-1.5 w-full inline-block bg-pink-600 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
                     >
                         Checkout
                     </button>
                     <div className="mt-6 flex justify-center text-center text-sm text-gray-600  ">
-                       <button
-                       type="button"
-                       className="font-medium text-blue-500"
-                       >
-                        Continue Shopping
-                        <span aria-hidden="true"> &rarr;</span>
-                       </button>
+                        <button
+                            type="button"
+                            className="font-medium text-blue-500"
+                        >
+                            Continue Shopping
+                            <span aria-hidden="true"> &rarr;</span>
+                        </button>
                     </div>
                 </Fragment>
             }
