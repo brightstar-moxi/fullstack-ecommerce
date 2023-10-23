@@ -55,7 +55,7 @@ export default function CommonCart({ cartItems = [] }) {
                             <div className="mt-6 border-t border-b py-2">
                                 <div className="flex items-center justify-between">
                                     <p className="text-sm text-gray-400">Subtotal</p>
-                                    <p className="text-lg text-gray-400 font-semibold">
+                                    <p className="text-lg text-black font-semibold">
                                         ${
                                             cartItems && cartItems.length ?
                                                 cartItems.reduce(
@@ -68,14 +68,14 @@ export default function CommonCart({ cartItems = [] }) {
 
                                 <div className="flex items-center justify-between">
                                     <p className="text-sm text-gray-400">Shipping</p>
-                                    <p className="text-lg text-gray-400 font-semibold">
+                                    <p className="text-lg text-black font-semibold">
                                         $0
                                     </p>
                                 </div>
 
                                 <div className="flex items-center justify-between">
                                     <p className="text-sm text-gray-400">Total</p>
-                                    <p className="text-lg text-gray-400 font-semibold">
+                                    <p className="text-lg text-black font-semibold">
                                         ${
                                             cartItems && cartItems.length ?
                                                 cartItems.reduce(
@@ -89,7 +89,7 @@ export default function CommonCart({ cartItems = [] }) {
                                     <button
                                         className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
                                     >
-                                    >
+                                    
                                         Checkout
                                     </button>
                                 </div>
