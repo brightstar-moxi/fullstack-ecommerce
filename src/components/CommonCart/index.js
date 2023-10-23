@@ -33,14 +33,66 @@ export default function CommonCart({ cartItems = [] }) {
                                                                         }
                                                                     </p>
                                                                 </div>
+                                                                <div className="mt-4 flex gap-3 items-end justify-between sm:mt-0 sm:items-start sm:justify-end" >
+                                                                    <p className="hrink-0 w-20 text-base font-semibold text-gray-950 sm:order-1 sm:ml-8 sm:text-right"> ${
+                                                                        cartItem && cartItem.productID && cartItem.productID.price
+                                                                    }
+                                                                    </p>
+                                                                    <button type="button" className="font-medium text-yellow-700 sm: order-2">
+                                                                        Remove
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
+
                                                     </li>
                                                 ))
                                             }
                                         </ul>
                                         : null
                                 }
+                            </div>
+                            <div className="mt-6 border-t border-b py-2">
+                                <div className="flex items-center justify-between">
+                                    <p className="text-sm text-gray-400">Subtotal</p>
+                                    <p className="text-lg text-gray-400 font-semibold">
+                                        ${
+                                            cartItems && cartItems.length ?
+                                                cartItems.reduce(
+                                                    (total, item) => item.productID.price + total, 0
+                                                )
+                                                : '0'
+                                        }
+                                    </p>
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <p className="text-sm text-gray-400">Shipping</p>
+                                    <p className="text-lg text-gray-400 font-semibold">
+                                        $0
+                                    </p>
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <p className="text-sm text-gray-400">Total</p>
+                                    <p className="text-lg text-gray-400 font-semibold">
+                                        ${
+                                            cartItems && cartItems.length ?
+                                                cartItems.reduce(
+                                                    (total, item) => item.productID.price + total, 0
+                                                )
+                                                : '0'
+                                        }
+                                    </p>
+                                </div>
+                                <div className="mt-5 text-center">
+                                    <button
+                                        className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
+                                    >
+                                    >
+                                        Checkout
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
