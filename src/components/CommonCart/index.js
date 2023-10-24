@@ -13,6 +13,7 @@ export default function CommonCart({ cartItems = [], handleDeleteCartItem, setCo
                             <div className="flow-root">
                                 {
                                     cartItems && cartItems.length ?
+                                    (
                                         <ul className="-my-8">
                                             {
                                                 cartItems.map((cartItem) => (
@@ -60,7 +61,10 @@ export default function CommonCart({ cartItems = [], handleDeleteCartItem, setCo
                                                 ))
                                             }
                                         </ul>
-                                        : null
+    )
+                                        : (
+                                            <h1 className="font-bold text-lg">Your cart is Empty !</h1>
+                                          )
                                 }
                             </div>
                             <div className="mt-6 border-t border-b py-2">
@@ -98,6 +102,7 @@ export default function CommonCart({ cartItems = [], handleDeleteCartItem, setCo
                                 </div>
                                 <div className="mt-5 text-center">
                                     <button
+                                    disabled={cartItems && cartItems.length === 0}
                                         className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
                                     >
 
