@@ -1,6 +1,8 @@
 'use client'
 
-export default function CommonCart({ cartItems = [] }) {
+import ComponentLevelLoader from "../Loader/componentlevel"
+
+export default function CommonCart({ cartItems = [], handleDeleteCartItem, setComponentLevelLoader, componentLevelLoader }) {
 
     return (
         <section className="h-screen bg-gray-100">
@@ -38,8 +40,17 @@ export default function CommonCart({ cartItems = [] }) {
                                                                         cartItem && cartItem.productID && cartItem.productID.price
                                                                     }
                                                                     </p>
-                                                                    <button type="button" className="font-medium text-yellow-700 sm: order-2">
-                                                                        Remove
+                                                                    <button type="button" className="font-medium text-yellow-700 sm: order-2" onClick={() => handleDeleteCartItem(cartItem._id)}>
+                                                                        {
+                                                                            componentLevelLoader && componentLevelLoader.loading
+                                                                                && componentLevelLoader.id === cartItem._id ?
+                                                                                <ComponentLevelLoader
+                                                                                    text={"Removing"}
+                                                                                    color={"#000000"}
+                                                                                    loading={componentLevelLoader && componentLevelLoader.loading}
+                                                                                /> : 'Remove'
+                                                                        }
+
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -89,7 +100,7 @@ export default function CommonCart({ cartItems = [] }) {
                                     <button
                                         className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
                                     >
-                                    
+
                                         Checkout
                                     </button>
                                 </div>
