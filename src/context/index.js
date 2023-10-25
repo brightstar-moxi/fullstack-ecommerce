@@ -18,9 +18,17 @@ export default function GlobalState({ children }) {
     });
     const [isAuthUser, setIsAuthUser] = useState(null);
     const [user, setUser] = useState(null);
-    const [currentUpdatedProduct, setCurrentUpdatedProduct]=useState(null)
+    const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null)
     const [showCartModal, setShowCartModal] = useState(false);
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState([]);
+    const [addresses, setAddresses] = useState([]);
+    const [addressFormData, setAddressFormData] = useState({
+        fullName: '',
+        city: '',
+        country: '',
+        postalCode: '',
+        address: ''
+    });
 
 
     useEffect(() => {
@@ -36,6 +44,11 @@ export default function GlobalState({ children }) {
     }, [Cookies])
 
     return (
-        <GlobalContext.Provider value={{ showNavModal, setShowNavModal, isAuthUser, setIsAuthUser, componentLevelLoader, setComponentLevelLoader, user, setUser, pageLevelLoader, setPageLevelLoader, currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal, setShowCartModal, cartItems, setCartItems }}>{children}</GlobalContext.Provider>
+        <GlobalContext.Provider value={{
+            showNavModal, setShowNavModal, isAuthUser, setIsAuthUser,
+            componentLevelLoader, setComponentLevelLoader, user, setUser, pageLevelLoader, setPageLevelLoader,
+            currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal, setShowCartModal, cartItems, setCartItems,
+            addresses, setAddresses, addressFormData, setAddressFormData
+        }}>{children}</GlobalContext.Provider>
     )
 }

@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 export async function POST(req) {
   await connectToDB();
 
-  const { email, password } = await req.json();
+  const { email, password, name } = await req.json();
 
   const { error } = schema.validate({ email, password });
 
@@ -65,7 +65,7 @@ export async function POST(req) {
    
     return NextResponse.json({
       success: true,
-      message: 'Login successfull !',
+      message: `Login successfull ${name}!`,
       finalData,
     });
   } catch (e) {
