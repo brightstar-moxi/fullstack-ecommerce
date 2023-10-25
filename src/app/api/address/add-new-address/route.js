@@ -16,14 +16,14 @@ const AddNewAddress = Joi.object({
 
 export const dynamic = "force-dynamic";
 
-export async function POST(res){
+export async function POST(req){
     try {
         await connectToDB();
 
-        const isAuthUser = await AuthUser(res);
+        const isAuthUser = await AuthUser(req);
 
         if(isAuthUser){
-            const data = await res.json();
+            const data = await req.json();
 
             const [fullName, address, city, country, postalCode, userID] = data;
 

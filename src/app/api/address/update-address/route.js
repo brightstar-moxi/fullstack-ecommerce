@@ -1,8 +1,10 @@
 
 
+
+
 export const dynamic = "force-dynamic";
 
-export async function GET(req){
+export async function PUT(req){
     try {
         
     } catch (error) {

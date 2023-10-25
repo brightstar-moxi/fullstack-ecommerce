@@ -1,8 +1,9 @@
 
 
+
 export const dynamic = "force-dynamic";
 
-export async function GET(req){
+export async function DELETE(req){
     try {
         
     } catch (error) {
