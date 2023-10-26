@@ -38,25 +38,24 @@ export const fetchAllAddresses = async (id) => {
         console.log(e);
       }
     };
-export const updateAddress = async (formdata) => {
-    try {
-        const res = await fetch('/api/address/update-address', {
+    export const updateAddress = async (formData) => {
+        try {
+          const res = await fetch("/api/address/update-address", {
+            method: "PUT",
             headers: {
-                'Content-Type': ' application/json',
-                Authorization: `Bearer ${Cookies.get('token')}`
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookies.get("token")}`,
             },
-            body: JSON.stringify(formdata),
-        })
-
-        const data = await res.json()
-
-        return data;
-
-
-    } catch (error) {
-        console.log(error);
-    }
-}
+            body: JSON.stringify(formData),
+          });
+      
+          const data = await res.json();
+      
+          return data;
+        } catch (e) {
+          console.log(e);
+        }
+      };
 export const deleteAddress = async (id) => {
     try {
         const res = await fetch('/api/address/delete-address', {

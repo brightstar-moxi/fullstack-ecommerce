@@ -4,7 +4,7 @@ import InputComponent from "@/components/FormElement/InputComponent";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context"
-import { addNewAddress, fetchAllAddresses } from "@/services/address";
+import { addNewAddress, fetchAllAddresses, updateAddress } from "@/services/address";
 import { addNewAddressFormControls } from "@/utils";
 import { useContext, useEffect, useState } from "react"
 import { toast } from "react-toastify";
@@ -14,11 +14,12 @@ export default function Account() {
     const { user, addresses, setAddresses, addressFormData, setAddressFormData, componentLevelLoader, setComponentLevelLoader } = useContext(GlobalContext);
 
     const [showAddressForm, setShowAddressForm] = useState(false);
+    const [currentEditedAddressId, setCurrentEditedAddressId] = useState(false);
 
-    async function extractAllAddress(){
+    async function extractAllAddress() {
         const res = await fetchAllAddresses(user?._id)
 
-        if(res.success){
+        if (res.success) {
             setAddresses(res.data)
         }
     }
@@ -26,7 +27,9 @@ export default function Account() {
 
     async function handleAddOrUpdateAddress() {
         setComponentLevelLoader({ loading: true, id: "" })
-        const res = await addNewAddress({ ...addressFormData, userID: user?._id })
+        const res = currentEditedAddressId !== null ?
+            await updateAddress({ ...addressFormData, _id: currentEditedAddressId }) :
+            await addNewAddress({ ...addressFormData, userID: user?._id })
 
         console.log(res);
 
@@ -42,7 +45,8 @@ export default function Account() {
                 postalCode: '',
                 address: ''
             })
-            extractAllAddress()
+            extractAllAddress();
+            setCurrentEditedAddressId(null);
         } else {
             setComponentLevelLoader({ loading: false, id: "" })
             toast.error(res.message, {
@@ -58,8 +62,20 @@ export default function Account() {
         }
     }
 
+    function handleUpdateAddress(getCurrentAddress) {
+        setShowAddressForm(true)
+        setAddressFormData({
+            fullName: getCurrentAddress.fullName,
+            city: getCurrentAddress.city,
+            country: getCurrentAddress.country,
+            postalCode: getCurrentAddress.postalCode,
+            address: getCurrentAddress.address
+        })
+        setCurrentEditedAddressId(getCurrentAddress._id)
+    }
+
     useEffect(() => {
-    if (user !== null) extractAllAddress();
+        if (user !== null) extractAllAddress();
     }, [user])
 
     return (
@@ -92,7 +108,7 @@ export default function Account() {
                                                 <p>City :{item.city}</p>
                                                 <p>Country :{item.country}</p>
                                                 <p>PostalCode :{item.postalCode}</p>
-                                                <button className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Update</button>
+                                                <button onClick={() => handleUpdateAddress(item)} className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Update</button>
                                                 <button className="mt-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Delete</button>
 
                                             </div>
