@@ -7,19 +7,23 @@ import { GlobalContext } from "@/context"
 import { addNewAddress, deleteAddress, fetchAllAddresses, updateAddress } from "@/services/address";
 import { addNewAddressFormControls } from "@/utils";
 import { useContext, useEffect, useState } from "react"
+import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 export default function Account() {
 
-    const { user, addresses, setAddresses, addressFormData, setAddressFormData, componentLevelLoader, setComponentLevelLoader } = useContext(GlobalContext);
+    const { user, addresses, setAddresses, addressFormData, setAddressFormData, componentLevelLoader, setComponentLevelLoader, pageLevelLoader, setPageLevelLoader } = useContext(GlobalContext);
 
     const [showAddressForm, setShowAddressForm] = useState(false);
     const [currentEditedAddressId, setCurrentEditedAddressId] = useState(false);
 
     async function extractAllAddress() {
+        setPageLevelLoader(true)
         const res = await fetchAllAddresses(user?._id)
 
         if (res.success) {
+            setPageLevelLoader(false)
+
             setAddresses(res.data)
         }
     }
@@ -74,15 +78,18 @@ export default function Account() {
         setCurrentEditedAddressId(getCurrentAddress._id);
     }
 
-    
-    async function handleDelete(getCurrentAddressID){
+
+    async function handleDelete(getCurrentAddressID) {
+        setComponentLevelLoader({ loading: true, id: getCurrentAddressID })
         const res = await deleteAddress(getCurrentAddressID)
-        if(res.success){
+        if (res.success) {
+            setComponentLevelLoader({ loading: false, id: "" })
             toast.success(res.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
             extractAllAddress();
-        }else{
+        } else {
+            setComponentLevelLoader({ loading: false, id: "" })
             toast.error(res.message, {
                 position: toast.POSITION.TOP_RIGHT
             })
@@ -114,25 +121,49 @@ export default function Account() {
                                 <h1 className="font-bold text-lg">
                                     Your Addresses :
                                 </h1>
-                                <div className="mt-4 flex flex-col gap-4">
-                                    {
-                                        addresses && addresses.length ?
-                                            addresses.map((item) => <div className="border p-6" key={item._id}>
-                                                <p>Name : {item.fullName}</p>
-                                                <p>Address :{item.address}</p>
-                                                <p>City :{item.city}</p>
-                                                <p>Country :{item.country}</p>
-                                                <p>PostalCode :{item.postalCode}</p>
-                                                <button onClick={() => handleUpdateAddress(item)} className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Update</button>
-                                                <button onClick={() =>handleDelete(item._id)} className="mt-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Delete</button>
+                                {
+                                    pageLevelLoader ?
+                                        <PulseLoader
+                                            color={'#000000'}
+                                            loading={pageLevelLoader}
+                                            size={15}
+                                            data-testid="loader"
+                                        />
+                                        :
+                                        <div className="mt-4 flex flex-col gap-4">
+                                            {
+                                                addresses && addresses.length ?
+                                                    addresses.map((item) => <div className="border p-6" key={item._id}>
+                                                        <p>Name : {item.fullName}</p>
+                                                        <p>Address :{item.address}</p>
+                                                        <p>City :{item.city}</p>
+                                                        <p>Country :{item.country}</p>
+                                                        <p>PostalCode :{item.postalCode}</p>
+                                                        <button onClick={() => handleUpdateAddress(item)} className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Update</button>
+                                                        <button onClick={() => handleDelete(item._id)} className="mt-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">
+                                                            {
+                                                                componentLevelLoader && componentLevelLoader.loading
+                                                                    && componentLevelLoader.id === item._id ?
+                                                                    (
+                                                                        <ComponentLevelLoader
+                                                                            text={"Deleting"}
+                                                                            color={"#ffffff"}
+                                                                            loading={componentLevelLoader && componentLevelLoader.loading}
+                                                                        />
+                                                                    ) : (
+                                                                        "Delete"
+                                                                    )
+                                                            }
+                                                        </button>
 
-                                            </div>
-                                            )
-                                            : (
-                                                <p>No address found ! Please add a new address below</p>
-                                            )
-                                    }
-                                </div>
+                                                    </div>
+                                                    )
+                                                    : (
+                                                        <p>No address found ! Please add a new address below</p>
+                                                    )
+                                            }
+                                        </div>
+                                }
                             </div>
                             <div className="mt-4">
                                 <button
