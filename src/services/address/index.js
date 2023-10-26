@@ -25,20 +25,19 @@ export const addNewAddress = async (formdata) => {
 export const fetchAllAddresses = async (id) => {
     try {
         const res = await fetch(`/api/address/get-all-address?id=${id}`, {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${Cookies.get('token')}`
-            },
-            body: JSON.stringify(formdata)
-        })
-
-        const data = await res.json()
-
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        });
+    
+        const data = await res.json();
+    
         return data;
-    } catch (error) {
-        console.log(error);
-    }
-}
+      } catch (e) {
+        console.log(e);
+      }
+    };
 export const updateAddress = async (formdata) => {
     try {
         const res = await fetch('/api/address/update-address', {
