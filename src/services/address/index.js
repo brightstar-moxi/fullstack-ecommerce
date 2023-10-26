@@ -57,19 +57,18 @@ export const fetchAllAddresses = async (id) => {
         }
       };
 export const deleteAddress = async (id) => {
-    try {
-        const res = await fetch('/api/address/delete-address', {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${Cookies.get('token')}`
-            },
-        })
+  try {
+    const res = await fetch(`/api/address/delete-address?id=${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
 
-        const data = await res.json()
+    const data = await res.json();
 
-        return data ;
-
-    } catch (error) {
-        console.log(error);
-    }
-}
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};

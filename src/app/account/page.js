@@ -4,7 +4,7 @@ import InputComponent from "@/components/FormElement/InputComponent";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context"
-import { addNewAddress, fetchAllAddresses, updateAddress } from "@/services/address";
+import { addNewAddress, deleteAddress, fetchAllAddresses, updateAddress } from "@/services/address";
 import { addNewAddressFormControls } from "@/utils";
 import { useContext, useEffect, useState } from "react"
 import { toast } from "react-toastify";
@@ -70,8 +70,23 @@ export default function Account() {
             country: getCurrentAddress.country,
             postalCode: getCurrentAddress.postalCode,
             address: getCurrentAddress.address
-        })
-        setCurrentEditedAddressId(getCurrentAddress._id)
+        });
+        setCurrentEditedAddressId(getCurrentAddress._id);
+    }
+
+    
+    async function handleDelete(getCurrentAddressID){
+        const res = await deleteAddress(getCurrentAddressID)
+        if(res.success){
+            toast.success(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            extractAllAddress();
+        }else{
+            toast.error(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            })
+        }
     }
 
     useEffect(() => {
@@ -109,7 +124,7 @@ export default function Account() {
                                                 <p>Country :{item.country}</p>
                                                 <p>PostalCode :{item.postalCode}</p>
                                                 <button onClick={() => handleUpdateAddress(item)} className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Update</button>
-                                                <button className="mt-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Delete</button>
+                                                <button onClick={() =>handleDelete(item._id)} className="mt-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Delete</button>
 
                                             </div>
                                             )
