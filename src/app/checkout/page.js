@@ -2,12 +2,13 @@
 
 import { GlobalContext } from "@/context"
 import { fetchAllAddresses } from "@/services/address";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react"
 
 export default function Checkout() {
 
     const { cartItems, user, addresses, setAddresses } = useContext(GlobalContext)
-
+    const router = useRouter();
     console.log(cartItems);
 
     async function getAllAddresses() {
@@ -72,8 +73,29 @@ export default function Checkout() {
                                 : (<p>No addresses added</p>)
                         }
                     </div>
+                    <button onClick={() => router.push('/account')} className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">
+                        Add new address
+                    </button>
+                    <div className="mt-6 border-t border-b py-2">
+                        <div className="flex items-center justify-between">
+                            <p className="text-sm font-medium text-gray-900">Subtotal</p>
+                            <p className="text-lg font-bold text-gray-900">
+                                $ {cartItems && cartItems.length ?
+                                    cartItems.reduce(
+                                        (total, item) => item.productID.price = total, 0
+                                    )
+                                    : '0'}
+                            </p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <p>Shipping</p>
+                            <p>Free</p>
+                        </div>
+                    </div>
                 </div>
-                <div></div>
+
+
+
             </div>
         </div>
     )
