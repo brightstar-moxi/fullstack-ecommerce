@@ -19,7 +19,7 @@ export default function Checkout() {
     }
 
     useEffect(() => {
-        if (user !== null) getAllAddresses
+        if (user !== null) getAllAddresses();
     }, [user]);
 
     console.log(addresses);
@@ -55,21 +55,25 @@ export default function Checkout() {
                     <p className="text-xl font-medium">Shipping address details</p>
                     <p className="text-gray-400 font-bold">Complete your order by selecting address below</p>
                     <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-6">
-                        {  addresses && addresses.length ?
-                                                    addresses.map((item) => <div className="border p-6" key={item._id}>
-                                                        <p>Name : {item.fullName}</p>
-                                                        <p>Address :{item.address}</p>
-                                                        <p>City :{item.city}</p>
-                                                        <p>Country :{item.country}</p>
-                                                        <p>PostalCode :{item.postalCode}</p>
-                                    <button className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">Select Address</button>
-                                </div>
-                                 
-    
-                              )  : (<p>No addresses added</p>)
+                        {
+                            addresses && addresses.length ?
+                                addresses.map((item) =>
+                                    <div key={item._id} className="border p-6">
+                                        <p>Name : {item.fullName}</p>
+                                        <p>Address :{item.address}</p>
+                                        <p>City :{item.city}</p>
+                                        <p>Country :{item.country}</p>
+                                        <p>PostalCode :{item.postalCode}</p>
+                                        <button className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">
+                                            Select Address
+                                        </button>
+                                    </div>
+                                )
+                                : (<p>No addresses added</p>)
                         }
                     </div>
                 </div>
+                <div></div>
             </div>
         </div>
     )
