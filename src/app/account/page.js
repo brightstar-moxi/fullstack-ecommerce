@@ -133,7 +133,8 @@ export default function Account() {
                                         <div className="mt-4 flex flex-col gap-4">
                                             {
                                                 addresses && addresses.length ?
-                                                    addresses.map((item) => <div className="border p-6" key={item._id}>
+                                                    addresses.map((item) => <div className="border p-6" 
+                                                    key={item._id}>
                                                         <p>Name : {item.fullName}</p>
                                                         <p>Address :{item.address}</p>
                                                         <p>City :{item.city}</p>
