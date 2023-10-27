@@ -88,8 +88,18 @@ export default function Checkout() {
                             </p>
                         </div>
                         <div className="flex items-center justify-between">
-                            <p>Shipping</p>
-                            <p>Free</p>
+                            <p className="text-sm font-medium text-gray-900">Shipping</p>
+                            <p className="text-lg font-bold text-gray-900">Free</p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <p className="text-sm font-medium text-gray-900">Total</p>
+                            <p className="text-lg font-bold text-gray-900">
+                                $ {cartItems && cartItems.length ?
+                                    cartItems.reduce(
+                                        (total, item) => item.productID.price = total, 0
+                                    )
+                                    : '0'}
+                            </p>
                         </div>
                     </div>
                 </div>
