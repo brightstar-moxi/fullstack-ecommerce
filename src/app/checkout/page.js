@@ -82,7 +82,7 @@ export default function Checkout() {
                             <p className="text-lg font-bold text-gray-900">
                                 $ {cartItems && cartItems.length ?
                                     cartItems.reduce(
-                                        (total, item) => item.productID.price = total, 0
+                                        (total, item) => item.productID.price + total, 0
                                     )
                                     : '0'}
                             </p>
@@ -96,7 +96,7 @@ export default function Checkout() {
                             <p className="text-lg font-bold text-gray-900">
                                 $ {cartItems && cartItems.length ?
                                     cartItems.reduce(
-                                        (total, item) => item.productID.price = total, 0
+                                        (total, item) => item.productID.price + total, 0
                                     )
                                     : '0'}
                             </p>

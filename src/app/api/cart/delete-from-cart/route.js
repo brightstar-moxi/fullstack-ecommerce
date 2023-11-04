@@ -34,7 +34,7 @@ export async function DELETE(req){
         }else{
             return NextResponse.json({
                 success: false,
-                message: "You are not authenticated",
+                message: "You are not authenticated , Try to login",
             });
         }
     } catch (error) {

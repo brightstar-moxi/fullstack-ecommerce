@@ -19,7 +19,7 @@ export default function CommonDetails({ item }) {
   async function handleAddToCart(getItem) {
     setComponentLevelLoader({ loading: true, id: "" });
 
-    const res = await addToCart({ productID: getItem._id, userID: user._id });
+    const res = await addToCart({ productID: getItem._id, });
 
     if (res.success) {
       toast.success(res.message, {
