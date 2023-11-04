@@ -3,11 +3,14 @@
 import { GlobalContext } from "@/context"
 import { fetchAllAddresses } from "@/services/address";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 
 export default function Checkout() {
 
-    const { cartItems, user, addresses, setAddresses } = useContext(GlobalContext)
+    const { cartItems, user, addresses, setAddresses, checkoutFormData, setCheckoutFormData } = useContext(GlobalContext);
+
+    const [selectedAddress, setSelectedAddress] = useState(null);
+
     const router = useRouter();
     console.log(cartItems);
 
@@ -23,7 +26,33 @@ export default function Checkout() {
         if (user !== null) getAllAddresses();
     }, [user]);
 
-    console.log(addresses);
+    function handleSelectedAddress(getAddress) {
+
+        if (getAddress._id === selectedAddress) {
+            setSelectedAddress(null)
+            setCheckoutFormData({
+                ...checkoutFormData,
+                shippingAddress: {}
+            });
+
+            return;
+        }
+
+        setSelectedAddress(getAddress._id)
+        setCheckoutFormData({
+            ...checkoutFormData,
+            shippingAddress: {
+                ...checkoutFormData.shippingAddress,
+                fullName: getAddress.fullName,
+                city: getAddress.city,
+                country: getAddress.country,
+                postalCode: getAddress.postalCode,
+                address: getAddress.address,
+            }
+        })
+    }
+
+    console.log(checkoutFormData);
 
     return (
         <div>
@@ -59,14 +88,15 @@ export default function Checkout() {
                         {
                             addresses && addresses.length ?
                                 addresses.map((item) =>
-                                    <div key={item._id} className="border p-6">
+                                    <div onClick={() => handleSelectedAddress(item)} key={item._id} className={`border p-6 ${item._id === selectedAddress ? "border-red-900" : ""
+                                        }`}>
                                         <p>Name : {item.fullName}</p>
                                         <p>Address :{item.address}</p>
                                         <p>City :{item.city}</p>
                                         <p>Country :{item.country}</p>
                                         <p>PostalCode :{item.postalCode}</p>
                                         <button className="mt-5 mr-5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">
-                                            Select Address
+                                            {item._id === selectedAddress ? 'Selected Address' : "Select Address"}
                                         </button>
                                     </div>
                                 )
@@ -100,6 +130,13 @@ export default function Checkout() {
                                     )
                                     : '0'}
                             </p>
+                        </div>
+                        <div className="pb-10">
+                            <button 
+                            disabled={(cartItems && cartItems.length === 0) || Object.keys(checkoutFormData.shippingAddress).length === 0}
+                                className="disabled:opacity-50 mt-5 mr-5 w-full inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">
+                                Checkout
+                            </button>
                         </div>
                     </div>
                 </div>

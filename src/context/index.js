@@ -3,7 +3,14 @@
 import { createContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
-
+export const initialCheckoutFormData = {
+    shippingAddress: {},
+    paymentMethod: '',
+    totalPrice: 0,
+    inPaid: false,
+    paidat: new Date(),
+    isProcessing: true
+}
 
 
 export const GlobalContext = createContext(null);
@@ -29,6 +36,7 @@ export default function GlobalState({ children }) {
         postalCode: '',
         address: ''
     });
+    const [checkoutFormData, setCheckoutFormData] = useState(initialCheckoutFormData)
 
 
     useEffect(() => {
@@ -50,7 +58,7 @@ export default function GlobalState({ children }) {
             showNavModal, setShowNavModal, isAuthUser, setIsAuthUser,
             componentLevelLoader, setComponentLevelLoader, user, setUser, pageLevelLoader, setPageLevelLoader,
             currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal, setShowCartModal, cartItems, setCartItems,
-            addresses, setAddresses, addressFormData, setAddressFormData
+            addresses, setAddresses, addressFormData, setAddressFormData, checkoutFormData, setCheckoutFormData
         }}>{children}</GlobalContext.Provider>
     )
 }

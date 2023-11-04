@@ -139,6 +139,10 @@ export default function CartModal() {
                         Go To Cart
                     </button>
                     <button
+                    onClick={()=>{
+                        router.push('/checkout')
+                        setShowCartModal(false)
+                    }}
                         disabled={cartItems && cartItems.length === 0}
                         type="button"
                         className="mt-1.5 w-full inline-block bg-pink-600 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
