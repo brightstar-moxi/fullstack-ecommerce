@@ -3,15 +3,23 @@
 import { GlobalContext } from "@/context"
 import { fetchAllAddresses } from "@/services/address";
 import { useRouter } from "next/navigation";
+import { callStripeSession } from "@/services/stripe";
 import { useContext, useEffect, useState } from "react"
+import { loadStripe } from "@stripe/stripe-js";
 
 export default function Checkout() {
 
+    const [isOrderProcessing, setIsOrderProcessing] = useState(false);
+    const [orderSuccess, setOrderSuccess] = useState(false);
     const { cartItems, user, addresses, setAddresses, checkoutFormData, setCheckoutFormData } = useContext(GlobalContext);
 
     const [selectedAddress, setSelectedAddress] = useState(null);
 
     const router = useRouter();
+
+    const publishableKey = 'pk_test_51O8ZLRGsokcNnthEMBCIfg9OtJPPnzwN06nmWBVeU5EzGIpZoFf4PqqGvbgobw2riGT5blIl2gDEiDIvVWzMI63b00aS5mObqB'
+    const stripePromise = loadStripe(publishableKey);
+
     console.log(cartItems);
 
     async function getAllAddresses() {
@@ -50,6 +58,32 @@ export default function Checkout() {
                 address: getAddress.address,
             }
         })
+    }
+
+ async function handleCheckout(){
+
+    const stripe = await stripePromise;
+    const createLineItems = cartItems.map((item) => ({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            images: [item.productID.imageUrl],
+            name: item.productID.name,
+          },
+          unit_amount: item.productID.price * 100,
+        },
+        quantity: 1,
+      }));
+      const res = await callStripeSession(createLineItems);
+      setIsOrderProcessing(true);
+      localStorage.setItem("stripe", true);
+      localStorage.setItem("checkoutFormData", JSON.stringify(checkoutFormData));
+  
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: res.id,
+      });
+  
+      console.log(error);
     }
 
     console.log(checkoutFormData);
@@ -133,6 +167,7 @@ export default function Checkout() {
                         </div>
                         <div className="pb-10">
                             <button 
+                            onClick={handleCheckout}
                             disabled={(cartItems && cartItems.length === 0) || Object.keys(checkoutFormData.shippingAddress).length === 0}
                                 className="disabled:opacity-50 mt-5 mr-5 w-full inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">
                                 Checkout
