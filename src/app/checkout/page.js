@@ -2,10 +2,11 @@
 
 import { GlobalContext } from "@/context"
 import { fetchAllAddresses } from "@/services/address";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { callStripeSession } from "@/services/stripe";
 import { useContext, useEffect, useState } from "react"
 import { loadStripe } from "@stripe/stripe-js";
+import { PulseLoader } from "react-spinners";
 
 export default function Checkout() {
 
@@ -14,6 +15,7 @@ export default function Checkout() {
     const { cartItems, user, addresses, setAddresses, checkoutFormData, setCheckoutFormData } = useContext(GlobalContext);
 
     const [selectedAddress, setSelectedAddress] = useState(null);
+    const params = useSearchParams()
 
     const router = useRouter();
 
@@ -33,6 +35,39 @@ export default function Checkout() {
     useEffect(() => {
         if (user !== null) getAllAddresses();
     }, [user]);
+
+
+    useEffect(() => {
+        async function createFinalOrder(){
+            const isStripe = JSON.parse(localStorage.getItem("stripe"));
+            
+      if (
+        isStripe &&
+        params.get("status") === "success" &&
+        cartItems &&
+        cartItems.length > 0
+      ){
+        setIsOrderProcessing(true);
+        const getCheckoutFormData = JSON.parse(
+            localStorage.getItem("checkoutFormData")
+          );
+const createFinalCheckoutFormData = {
+    user: user?._id,
+    shippingAddress : getCheckoutFormData.shippingAddress,
+    orderItems: cartItems.map((item) => ({
+        qty: 1,
+        product: item.productID,
+      })),
+      paymentMethod: "Stripe",
+      totalPrice: cartItems.reduce(
+        (total, item) => item.productID.price + total,
+        0
+      ),
+}
+      }
+        }
+    }, [params.get("status"), cartItems])
+    
 
     function handleSelectedAddress(getAddress) {
 
@@ -60,33 +95,47 @@ export default function Checkout() {
         })
     }
 
- async function handleCheckout(){
+    async function handleCheckout() {
 
-    const stripe = await stripePromise;
-    const createLineItems = cartItems.map((item) => ({
-        price_data: {
-          currency: "usd",
-          product_data: {
-            images: [item.productID.imageUrl],
-            name: item.productID.name,
-          },
-          unit_amount: item.productID.price * 100,
-        },
-        quantity: 1,
-      }));
-      const res = await callStripeSession(createLineItems);
-      setIsOrderProcessing(true);
-      localStorage.setItem("stripe", true);
-      localStorage.setItem("checkoutFormData", JSON.stringify(checkoutFormData));
-  
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: res.id,
-      });
-  
-      console.log(error);
+        const stripe = await stripePromise;
+        const createLineItems = cartItems.map((item) => ({
+            price_data: {
+                currency: "usd",
+                product_data: {
+                    images: [item.productID.imageUrl],
+                    name: item.productID.name,
+                },
+                unit_amount: item.productID.price * 100,
+            },
+            quantity: 1,
+        }));
+        const res = await callStripeSession(createLineItems);
+        setIsOrderProcessing(true);
+        localStorage.setItem("stripe", true);
+        localStorage.setItem("checkoutFormData", JSON.stringify(checkoutFormData));
+
+        const { error } = await stripe.redirectToCheckout({
+            sessionId: res.id,
+        });
+
+        console.log(error);
     }
 
     console.log(checkoutFormData);
+
+    if (isOrderProcessing) {
+        return(
+    
+        <div className="w-full min-h-screen flex justify-center items-center">
+            <PulseLoader
+                color={'#000000'}
+                loading={isOrderProcessing}
+                size={30}
+                data-testid="loader"
+            />
+        </div>
+        )
+    }
 
     return (
         <div>
@@ -166,9 +215,9 @@ export default function Checkout() {
                             </p>
                         </div>
                         <div className="pb-10">
-                            <button 
-                            onClick={handleCheckout}
-                            disabled={(cartItems && cartItems.length === 0) || Object.keys(checkoutFormData.shippingAddress).length === 0}
+                            <button
+                                onClick={handleCheckout}
+                                disabled={(cartItems && cartItems.length === 0) || Object.keys(checkoutFormData.shippingAddress).length === 0}
                                 className="disabled:opacity-50 mt-5 mr-5 w-full inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white">
                                 Checkout
                             </button>
