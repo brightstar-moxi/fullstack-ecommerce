@@ -12,7 +12,7 @@ export const initialCheckoutFormData = {
     isProcessing: true
 }
 
-const protectdRoutes = [
+const protectedRoutes = [
     '/cart',
     '/checkout',
     '/account',
@@ -22,8 +22,8 @@ const protectdRoutes = [
     '/admin-view/add-product',
     
 
-],
-const protectdRoues = [
+]
+const protectedAdminRoutes = [
     '/cart',
     '/checkout',
     '/account',
