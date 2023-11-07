@@ -12,6 +12,29 @@ export const initialCheckoutFormData = {
     isProcessing: true
 }
 
+const protectdRoutes = [
+    '/cart',
+    '/checkout',
+    '/account',
+    '/orders',
+    '/admin-view',
+    '/adminiview/add-product',
+    '/admin-view/add-product',
+    
+
+],
+const protectdRoues = [
+    '/cart',
+    '/checkout',
+    '/account',
+    '/orders',
+    '/admin-view',
+    '/adminiview/add-product',
+    '/admin-view/add-product',
+    
+
+]
+
 
 export const GlobalContext = createContext(null);
 
@@ -49,7 +72,8 @@ export default function GlobalState({ children }) {
             setUser(userData);
             setCartItems(getCartItems)
         } else {
-            setIsAuthUser(false)
+            setIsAuthUser(false);
+            setUser({}) // authenticated user
         }
     }, [Cookies])
 
