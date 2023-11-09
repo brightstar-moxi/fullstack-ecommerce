@@ -57,6 +57,8 @@ export default function GlobalState({ children }) {
         address: ''
     });
     const [checkoutFormData, setCheckoutFormData] = useState(initialCheckoutFormData);
+    
+    const[allOrdersForUser, setAllOrdersForUser]= useState([])
     const router = useRouter();
     const pathName = usePathname();
     useEffect(() => {
