@@ -19,15 +19,15 @@ const protectedRoutes = [
     '/account',
     '/orders',
     '/admin-view',
-    '/admini-view/add-product',
-    '/admin-view/all-product',
+    '/admin-view/add-product',
+    '/admin-view/all-products',
 
 
 ]
 const protectedAdminRoutes = [
     '/admin-view',
-    '/admin-iview/add-product',
-    '/admin-view/all-product',
+    '/admin-view/add-product',
+    '/admin-view/all-products',
 
 
 ]
