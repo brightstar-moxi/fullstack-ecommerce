@@ -1,5 +1,6 @@
 'use client'
 
+import Notification from "@/components/Notification"
 import { GlobalContext } from "@/context"
 import { getAllOrdersForUser } from "@/services/order"
 import { useContext, useEffect } from "react"
@@ -67,6 +68,29 @@ export default function Orders() {
                                                                 <p className="mr-3 text-2xl font-semibold text-gray-900">${item.totalPrice}</p>
                                                             </div>
                                                         </div>
+                                                        <div className="flex gap-2">
+                                                            {
+                                                                item.orderItem.map((orderItem, index) => (
+                                                                    <div key={index} className="shrink-0">
+                                                                        <img alt="order Item" className="h24 w-24 max-w-full rounded-lg object-cover" src={orderItem && orderItem.product && orderItem.product.imageUrl} />
+                                                                    </div>
+                                                                )
+                                                                )}
+                                                        </div>
+                                                        <div className="flex gap">
+                                                            <button
+
+                                                                className="disabled:opacity-50 mt-5 mr-5 w-full  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                                                            >
+                                                                {item.isProcessing ? 'Order is Processing' : 'Order is delivered'}
+                                                            </button>
+                                                            <button
+
+                                                                className="disabled:opacity-50 mt-5 mr-5 w-full  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                                                            >
+                                                                View Order Details
+                                                            </button>
+                                                        </div>
                                                     </li>
                                                 })
                                             }
@@ -78,6 +102,7 @@ export default function Orders() {
                     </div>
                 </div>
             </div>
+            <Notification/>
         </section>
     )
 }
