@@ -57,8 +57,8 @@ export default function GlobalState({ children }) {
         address: ''
     });
     const [checkoutFormData, setCheckoutFormData] = useState(initialCheckoutFormData);
-    
-    const[allOrdersForUser, setAllOrdersForUser]= useState([])
+
+    const [allOrdersForUser, setAllOrdersForUser] = useState([])
     const router = useRouter();
     const pathName = usePathname();
     useEffect(() => {
@@ -90,7 +90,8 @@ export default function GlobalState({ children }) {
             showNavModal, setShowNavModal, isAuthUser, setIsAuthUser,
             componentLevelLoader, setComponentLevelLoader, user, setUser, pageLevelLoader, setPageLevelLoader,
             currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal, setShowCartModal, cartItems, setCartItems,
-            addresses, setAddresses, addressFormData, setAddressFormData, checkoutFormData, setCheckoutFormData
+            addresses, setAddresses, addressFormData, setAddressFormData, checkoutFormData, setCheckoutFormData,
+            allOrdersForUser, setAllOrdersForUser
         }}>{children}</GlobalContext.Provider>
     )
 }

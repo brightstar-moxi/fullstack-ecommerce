@@ -5,28 +5,37 @@ import { getAllOrdersForUser } from "@/services/order"
 import { useContext, useEffect } from "react"
 import { toast } from "react-toastify"
 
-export default function Orders(){
-const {user, pageLevelLoader, setPageLevelLoader} = useContext(GlobalContext)
+export default function Orders() {
+    const { user, pageLevelLoader, setPageLevelLoader, allOrdersForUser, setAllOrdersForUser } = useContext(GlobalContext)
 
-async function extractAllOrders(){
-    setPageLevelLoader(true)
-    const res = await getAllOrdersForUser(user?._id)
+    async function extractAllOrders() {
+        setPageLevelLoader(true)
+        const res = await getAllOrdersForUser(user?._id)
 
-    if(res.success){
+        if (res.success) {
+            setPageLevelLoader(false)
 
-    }else{
-        toast.error(res.message, {
-            position: toast.POSITION.TOP_RIGHT
-        })
+            setAllOrdersForUser(res.data)
+            toast.success(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            })
+
+        } else {
+            setPageLevelLoader(false)
+            toast.error(res.message, {
+                position: toast.POSITION.TOP_RIGHT
+            })
+        }
     }
-}
 
-useEffect(()=>{
-  if(user !== null) extractAllOrders()
-},[user])
-    return(
+    useEffect(() => {
+        if (user !== null) extractAllOrders()
+    }, [user])
+
+    console.log(allOrdersForUser);
+    return (
         <section>
             All your Orders
-            </section>
+        </section>
     )
 }
