@@ -62,7 +62,8 @@ export default function GlobalState({ children }) {
     const router = useRouter();
     const pathName = usePathname();
 
-    const [orderDetails, setOrderDetails] = useState(null)
+    const [ orderDetails,
+        setOrderDetails,] = useState(null)
 
 
     useEffect(() => {
