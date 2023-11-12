@@ -61,6 +61,10 @@ export default function GlobalState({ children }) {
     const [allOrdersForUser, setAllOrdersForUser] = useState([])
     const router = useRouter();
     const pathName = usePathname();
+
+    const [orderDetails, setOrderDetails] = useState(null)
+
+
     useEffect(() => {
         console.log(Cookies.get('token'))
 
@@ -91,7 +95,7 @@ export default function GlobalState({ children }) {
             componentLevelLoader, setComponentLevelLoader, user, setUser, pageLevelLoader, setPageLevelLoader,
             currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal, setShowCartModal, cartItems, setCartItems,
             addresses, setAddresses, addressFormData, setAddressFormData, checkoutFormData, setCheckoutFormData,
-            allOrdersForUser, setAllOrdersForUser
+            allOrdersForUser, setAllOrdersForUser, orderDetails, setOrderDetails
         }}>{children}</GlobalContext.Provider>
     )
 }
