@@ -106,14 +106,29 @@ export default function OrderDetail() {
                                     <p className="text-base leading-5 text-gray-900">Free</p>
                                 </div>
                                 <div className="flex justify-between w-full">
-                                    <p className="text-base leading-5 text-gray-800">Subtotal</p>
+                                    <p className="text-base leading-5 text-gray-800">Total</p>
                                     <p className="text-base leading-5 text-gray-500">${orderDetails && orderDetails.totalPrice}</p>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div className="bg-gray-50 w-full xl:w-96 flex  items-center md:items-start px-4 py-6 flex-col">
+            <h3 className="text-xl font-semibold leading-6 text-gray-900">
+              Customer Details
+            </h3>
+            <div className="flex flex-col justify-start items-start flex-shrink-0">
+              <div className="flex gap-4 justify-center flex-col w-full md:justify-start   py-8 border-b border-gray-200">
+                <p className="text-base font-semibold leading-4 text-left text-gray-950">
+                  Name: {user?.name}
+                </p>
+                <p className="text-base font-semibold leading-4 text-left text-gray-950">
+                  Email: {user?.email}
+                </p>
+              </div>
+            </div>
+            </div>
+            </div>
             </div>
         </div>
     )
