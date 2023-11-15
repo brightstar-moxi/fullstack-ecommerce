@@ -42,21 +42,21 @@ export default function Register() {
   console.log(isFormValid());
 
   async function handleRegisterOnSubmit() {
-    setPageLevelLoader(true);
+     setPageLevelLoader(true);
     const data = await registerNewUser(formData);
 
     if (data.success) {
       toast.success(data.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
-      setIsRegistered(true);
-      setPageLevelLoader(false);
+       setIsRegistered(true);
+      // setPageLevelLoader(false);
       setFormData(initialFormData);
     } else {
       toast.error(data.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
-      setPageLevelLoader(false);
+       setPageLevelLoader(false);
       setFormData(initialFormData);
     }
 

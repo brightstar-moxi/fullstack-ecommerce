@@ -14,13 +14,12 @@ export const initialCheckoutFormData = {
 }
 
 const protectedRoutes = [
-    '/cart',
-    '/checkout',
-    '/account',
-    '/orders',
-    '/admin-view',
-    '/admin-view/add-product',
-    '/admin-view/all-products',
+    'cart',
+    'checkout',
+    'account',
+    'orders',
+    'admin-view',
+
 
 
 ]
@@ -62,7 +61,7 @@ export default function GlobalState({ children }) {
     const router = useRouter();
     const pathName = usePathname();
 
-    const [ orderDetails,
+    const [orderDetails,
         setOrderDetails,] = useState(null)
 
 
@@ -82,8 +81,15 @@ export default function GlobalState({ children }) {
     }, [Cookies])
 
     useEffect(() => {
-        if (user && Object.keys(user).length === 0 && protectedRoutes.indexOf(pathName) > -1) router.push('/login')
-
+        if (
+            pathName !== "/register" && pathName !== "/register-real" &&
+            !pathName.includes("product") &&
+            pathName !== "/" &&
+            user &&
+            Object.keys(user).length === 0 &&
+            protectedRoutes.includes(pathName) > -1
+        )
+            router.push("/login");
     }, [user, pathName])
 
     useEffect(() => {
@@ -91,7 +97,7 @@ export default function GlobalState({ children }) {
     }, [user, pathName])
 
     return (
-        <GlobalContext.Provider  value={{
+        <GlobalContext.Provider value={{
             showNavModal, setShowNavModal, isAuthUser, setIsAuthUser,
             componentLevelLoader, setComponentLevelLoader, user, setUser, pageLevelLoader, setPageLevelLoader,
             currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal, setShowCartModal, cartItems, setCartItems,
