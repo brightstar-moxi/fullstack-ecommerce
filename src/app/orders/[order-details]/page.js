@@ -2,7 +2,7 @@
 
 import { GlobalContext } from "@/context"
 import { getOrderDetails } from "@/services/order";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react"
 import { PulseLoader } from "react-spinners";
 
@@ -10,11 +10,12 @@ export default function OrderDetail() {
 
     const { pageLevelLoader, setPageLevelLoader, orderDetails, setOrderDetails, user } = useContext(GlobalContext);
 
-    const params = useParams()
+    const params = useParams();
+    const router = useRouter();
 
     async function extractOrderDetails() {
         setPageLevelLoader(true);
-        const res = await getOrderDetails(params['order-details']);
+        const res = await getOrderDetails(params["order-details"]);
         if (res.success) {
             setPageLevelLoader(false);
             setOrderDetails(res.data);
@@ -113,33 +114,40 @@ export default function OrderDetail() {
                         </div>
                     </div>
                 </div>
+                <div className="flex flex-col gap-5">
+                    <div className="bg-gray-50 w-full xl:w-96 flex items-center md:items-start px-4 py-6 flex-col">
+                        <h3 className="text-xl font-semibold leading-6 text-gray-900">
+                            Customer Details
+                        </h3>
+                        <div className="flex flex-col justify-start items-start flex-shrink-0">
+                            <div className="flex gap-4 justify-center flex-col w-full md:justify-start py-8 border-b border-gray-200">
+                                <p className="text-base font-semibold leading-4 text-left text-gray-950">
+                                    Name: {user?.name}
+                                </p>
+                                <p className="text-base font-semibold leading-4 text-left text-gray-950">
+                                    Email: {user?.email}
+                                </p>
 
-                <div className="bg-gray-50 w-full xl:w-96 flex items-center md:items-start px-4 py-6 flex-col">
-                    <h3 className="text-xl font-semibold leading-6 text-gray-900">
-                        Customer Details
-                    </h3>
-                    <div className="flex flex-col justify-start items-start flex-shrink-0">
-                        <div className="flex gap-4 justify-center flex-col w-full md:justify-start py-8 border-b border-gray-200">
-                            <p className="text-base font-semibold leading-4 text-left text-gray-950">
-                                Name: {user?.name}
-                            </p>
-                            <p className="text-base font-semibold leading-4 text-left text-gray-950">
-                                Email: {user?.email}
-                            </p>
-
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
-                    <div className="flex justify-center md:justify-start xl:flex-col md:space-x-6 lg:space-x-9 space-x-4 md:space-y-0 xl:space-y-12 md:flex-row item-center md:items-start">
-                        <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
-                            <p>Shipping Address</p>
-                            <p>{orderDetails && orderDetails.shippingAddress.address}</p>
-                            <p>{orderDetails && orderDetails.shippingAddress.}</p>
-                            <p>{orderDetails && orderDetails.shippingAddress.address}</p>
-                            <p>Shipping Address</p>
+                    <div className="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
+                        <div className="flex justify-center md:justify-start xl:flex-col md:space-x-6 lg:space-x-9 space-x-4 md:space-y-0 xl:space-y-12 md:flex-row item-center md:items-start">
+                            <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
+                                <p>Shipping Address</p>
+                                <p>Address: {orderDetails && orderDetails.shippingAddress.address}</p>
+                                <p> City: {orderDetails && orderDetails.shippingAddress.city}</p>
+                                <p>Country: {orderDetails && orderDetails.shippingAddress.country}</p>
+                                <p>Postal Code:{orderDetails && orderDetails.shippingAddress.postalCode}</p>
+                            </div>
                         </div>
                     </div>
+                    <button
+                        onClick={() => router.push('/')}
+                        className=" mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                    >
+                        Shop Again
+                    </button>
                 </div>
             </div>
         </div>

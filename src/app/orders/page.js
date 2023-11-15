@@ -69,7 +69,7 @@ export default function Orders() {
                     {allOrdersForUser.map((item) => (
                       <li
                         key={item._id}
-                        className="bg-gray-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
+                        className="bg-green-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
                       >
                         <div className="flex">
                           <h1 className="font-bold text-lg mb-3 flex-1">

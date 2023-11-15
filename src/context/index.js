@@ -91,7 +91,7 @@ export default function GlobalState({ children }) {
     }, [user, pathName])
 
     return (
-        <GlobalContext.Provider value={{
+        <GlobalContext.Provider  value={{
             showNavModal, setShowNavModal, isAuthUser, setIsAuthUser,
             componentLevelLoader, setComponentLevelLoader, user, setUser, pageLevelLoader, setPageLevelLoader,
             currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal, setShowCartModal, cartItems, setCartItems,
