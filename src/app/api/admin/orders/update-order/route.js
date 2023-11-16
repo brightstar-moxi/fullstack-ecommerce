@@ -1,11 +1,60 @@
+import connectToDB from "@/database";
+import AuthUser from "@/middleware/AuthUser";
+import Order from "@/models/order";
+import { NextResponse } from "next/server";
 
 
 export const dynamic = "force-dynamic";
 
-export async function PUT (req){
+export async function PUT(req) {
 
     try {
-        
+        await connectToDB();
+        const isAuthUser = await AuthUser(req);
+
+        if (isAuthUser?.role === "admin") {
+            const {
+                _id,
+                shippingAddress,
+                orderItem,
+                paymentMethod,
+                isPaid,
+                paidAt,
+                isProcessing
+            } = data;
+
+            const updateOrder = await Order.findOneAndUpdate(
+                { _id: _id },
+                {
+                    shippingAddress,
+                    orderItem,
+                    paymentMethod,
+                    isPaid,
+                    paidAt,
+                    isProcessing
+                },
+                { new: true }
+            );
+            if (updateOrder) {
+                return NextResponse.json({
+                    success: true,
+                    message: "Order status updated successfully"
+                });
+            } else {
+                return NextResponse.json({
+                    success: false,
+                    message: "Failed to update the status of order"
+                });
+            }
+
+        } else {
+
+            return NextResponse.json({
+                success: false,
+                message: "You are not authorised"
+            })
+        }
+
     } catch (error) {
         console.log(error);
 
