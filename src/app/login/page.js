@@ -30,7 +30,7 @@ export default function Login() {
 
     const router = useRouter();
 
-    console.log(formData);
+    // console.log(formData);
 
     function isValidForm() {
         return formData && formData.email && formData.email.trim() != '' &&
@@ -82,7 +82,11 @@ async function handleLogin(){
 //     console.error("An error occurred:", error);
 // }
 // }
-console.log(isAuthUser, user)
+
+
+
+//********************* */
+ console.log(isAuthUser, user)
 
 useEffect(()=>{
 if (isAuthUser) router.push("/client-view") ;

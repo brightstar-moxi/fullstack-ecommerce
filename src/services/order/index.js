@@ -57,36 +57,36 @@ export const getOrderDetails = async (id) => {
 
 export const getAllOrdersForAllUsers = async () => {
     try {
-        const res = await fetch('/api/admin/orders/get-all-orders', {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${Cookies.get("token")}`,
-            },
-        });
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.log(error);
+      const res = await fetch(`/api/admin/orders/get-all-orders`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
+  
+      const data = await res.json();
+  
+      return data;
+    } catch (e) {
+      console.log(e);
     }
-}
-
-export const updateStatusOfOrder = async (formdata) => {
+  };
+  
+  export const updateStatusOfOrder = async (formData) => {
     try {
-        const res = await fetch(`/api/admin/orders/update-order`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${Cookies.get("token")}`,
-            },
-            body: JSON.stringify(formdata),
-        });
-
-        const data = await res.json();
-
-        return data;
-    } catch (error) {
-        console.log(error);
+      const res = await fetch(`/api/admin/orders/update-order`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await res.json();
+  
+      return data;
+    } catch (e) {
+      console.log(e);
     }
-}
+  };
