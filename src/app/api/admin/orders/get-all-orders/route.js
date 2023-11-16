@@ -6,31 +6,36 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(req){
-try {
-    await connectToDB();
-const isAuthUser = await AuthUser(req)
-if (isAuthUser?.role === 'admin') {
-const getAllOrders = await Order.find({}).populate('orderItems.product').populate('user');
+export async function GET(req) {
+    try {
+        await connectToDB();
+        const isAuthUser = await AuthUser(req)
+        if (isAuthUser?.role === 'admin') {
+            const getAllOrders = await Order.find({}).populate('orderItems.product').populate('user');
 
-if(getAllOrders){
-    return NextResponse.json({
-        success : true,
-        message : "You are not authorised"
-    })
-}
-} else {
-    return NextResponse.json({
-        success : false,
-        message : "You are not authorised"
-    })
-}
-} catch (error) {
-    console.log(error);
+            if (getAllOrders) {
+                return NextResponse.json({
+                    success: true,
+                    data: getAllOrders
+                })
+            } else {
+                return NextResponse.json({
+                    success: false,
+                    message: "Failed to fetch the orders ! Please try again after some time"
+                })
+            }
+        } else {
+            return NextResponse.json({
+                success: false,
+                message: "You are not authorised"
+            })
+        }
+    } catch (error) {
+        console.log(error);
 
-    return NextResponse.json({
-        success : false,
-        message : 'Something went wrong ! pls try again later'
-    })
-}
+        return NextResponse.json({
+            success: false,
+            message: 'Something went wrong ! pls try again later'
+        })
+    }
 }
