@@ -11,7 +11,7 @@ export async function PUT(req) {
     try {
         await connectToDB();
         const isAuthUser = await AuthUser(req);
-
+        const data = await req.json();
         if (isAuthUser?.role === "admin") {
             const {
                 _id,

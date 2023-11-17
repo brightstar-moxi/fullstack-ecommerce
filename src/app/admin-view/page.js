@@ -1,9 +1,10 @@
 'use client'
+import ComponentLevelLoader from "@/components/Loader/componentlevel";
 // import { useState } from "react"
 
 import { GlobalContext } from "@/context"
 import { getAllOrdersForAllUsers, updateStatusOfOrder } from "@/services/order";
-import { func } from "joi";
+
 import { useContext, useEffect } from "react"
 import { PulseLoader } from "react-spinners";
 
@@ -11,7 +12,7 @@ import { PulseLoader } from "react-spinners";
 
 
 export default function AdminView() {
-    const { allOrdersForAllUsers, setAllOrdersForAllUsers, user, pageLevelLoader, setPageLevelLoader, } = useContext(GlobalContext);
+    const { allOrdersForAllUsers, setAllOrdersForAllUsers, user, pageLevelLoader, setPageLevelLoader, componentLevelLoader, setComponentLevelLoader, } = useContext(GlobalContext);
 
     async function extractAllOrderForAllUsers() {
         const res = await getAllOrdersForAllUsers();
@@ -34,12 +35,16 @@ export default function AdminView() {
     console.log(allOrdersForAllUsers);
 
     async function handleUpdateOrderStatus(getItem) {
+        setComponentLevelLoader({ loading: true, id: getItem._id })
         const res = await updateStatusOfOrder({
             ...getItem,
             isProcessing: false
         })
         if (res.success) {
+            setComponentLevelLoader({ loading: false, id: '' })
             extractAllOrderForAllUsers()
+        } else {
+            setComponentLevelLoader({ loading: true, id: '' })
         }
     }
 
@@ -122,10 +127,24 @@ export default function AdminView() {
                                                         : "Order is delivered"}
                                                 </button>
                                                 <button
+                                                    disabled={!item.isProcessing}
                                                     onClick={() => handleUpdateOrderStatus(item)}
-                                                    className=" mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                                                    className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
                                                 >
-                                                    Update Order Status
+                                                    {componentLevelLoader &&
+                                                        componentLevelLoader.loading &&
+                                                        componentLevelLoader.id === item._id ? (
+                                                        <ComponentLevelLoader
+                                                            text={"Updating Order Status"}
+                                                            color={"#ffffff"}
+                                                            loading={
+                                                                componentLevelLoader &&
+                                                                componentLevelLoader.loading
+                                                            }
+                                                        />
+                                                    ) : (
+                                                        "Update Order Status"
+                                                    )}
                                                 </button>
                                             </div>
                                         </li>
