@@ -30,14 +30,14 @@ export default function CommonCart({ cartItems = [], handleDeleteCartItem, setCo
                                                         <div className="flex flex-1 flex-col justify-between">
                                                             <div className="sm:col-gap-5 sm:grid sm:grid-cols-2">
                                                                 <div className="pr-8 sm:pr-4">
-                                                                    <p className="text-base font-semibold text-gray-900">
+                                                                    <p className="text-base font-semibold text-white">
                                                                         {
                                                                             cartItem && cartItem.productID && cartItem.productID.name
                                                                         }
                                                                     </p>
                                                                 </div>
                                                                 <div className="mt-4 flex gap-3 items-end justify-between sm:mt-0 sm:items-start sm:justify-end" >
-                                                                    <p className="hrink-0 w-20 text-base font-semibold text-gray-950 sm:order-1 sm:ml-8 sm:text-right"> ${
+                                                                    <p className="hrink-0 w-20 text-base font-semibold text-white sm:order-1 sm:ml-8 sm:text-right"> ${
                                                                         cartItem && cartItem.productID && cartItem.productID.price
                                                                     }
                                                                     </p>

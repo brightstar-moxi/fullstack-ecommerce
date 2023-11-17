@@ -25,7 +25,7 @@ function NavItems({ isModalView = false, isAdminView, router }) {
         }`}>
         {
           isAdminView ? adminNavOptions.map((item) => (<li
-            className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
+            className=" cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
             key={item.id}
             onClick={() => router.push(item.path)}
           >
@@ -33,7 +33,7 @@ function NavItems({ isModalView = false, isAdminView, router }) {
           </li>))
             : navOptions.map((item) => (
               <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
+                className="text-blue-700 cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
                 key={item.id}
                 onClick={() => router.push(item.path)}
               >
@@ -83,10 +83,10 @@ export default function Navbar() {
   const isAdminView = pathName.includes("admin-view")
   return (
     <>
-      <nav className="bg-red-500 fixed w-full z-20 top-0 left-0 border-b border-gray-200">
+      <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div onClick={() => router.push('/')} className="flex items-center cursor-pointer">
-            <span className="slef-center text-2xl font-semibold whitespace-nowrap">
+            <span className="text-blue-700 slef-center text-2xl font-semibold whitespace-nowrap">
               Brightstar-Ecommerce
             </span>
 
@@ -95,26 +95,26 @@ export default function Navbar() {
           <div className="flex md:order-2 gap-2 ">
             {!isAdminView && isAuthUser ? (
               <Fragment>
-                <button  onClick={() =>router.push('/account')} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Account</button>
-                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" onClick={()=> setShowCartModal(true)}>Cart</button>
+                <button  onClick={() =>router.push('/account')} className="mt-1.5 inline-block bg-blue-700 px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Account</button>
+                <button className="mt-1.5 inline-block bg-blue-700 px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" onClick={()=> setShowCartModal(true)}>Cart</button>
               </Fragment>
             ) : null}
             {
               user?.role === 'admin' ?
                 isAdminView ? (
-                  <button className={"mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"}
+                  <button className={"mt-1.5 inline-block bg-blue-700 px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"}
                     onClick={() => router.push('/client-view')}
                   >Client View</button>
                 )
                   : (
-                    <button onClick={() => router.push('/admin-view')} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Admin Veiw</button>)
+                    <button onClick={() => router.push('/admin-view')} className="mt-1.5 inline-block bg-blue-700 px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Admin Veiw</button>)
                 : null
             }
             {
               isAuthUser ? (
-                <button onClick={handleLogout} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" >Logout</button>) :
+                <button onClick={handleLogout} className="mt-1.5 inline-block bg-blue-700 px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" >Logout</button>) :
                 (
-                  <button onClick={() => router.push('/login')} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button>)
+                  <button onClick={() => router.push('/login')} className="mt-1.5 inline-block bg-blue-700 px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button>)
             }
             <button
               data-collapse-toggle="navbar-sticky"

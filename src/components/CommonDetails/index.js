@@ -37,7 +37,7 @@ export default function CommonDetails({ item }) {
   }
 
   return (
-    <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
       <div className="container mx-auto px-4">
         <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
           <div className="lg:col-span-3 lg:row-end-1">
@@ -81,11 +81,11 @@ export default function CommonDetails({ item }) {
           </div>
           <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
             <h1
-              className="text-2x1 font-bold text-gray-900"
+              className="text-2x1 font-bold text-blue-100"
             >{item && item.name}</h1>
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end">
-                <h1 className={`text-3xl font-bold mr-2 ${item.onSale === 'yes' ? 'line-through' : ""}`}>${item && item.price}</h1>
+                <h1 className={`text-3xl font-bold mr-2 text-white ${item.onSale === 'yes' ? 'line-through' : ""}`}>${item && item.price}</h1>
                 {
                   item.onSale === 'yes' ? (<h1 className="text-3xl font-bold text-red-700">{`$${(item.price - item.price + (item.priceDrop / 100)).toFixed(2)}`}</h1>)
                     : null
@@ -95,7 +95,7 @@ export default function CommonDetails({ item }) {
               <button
                 type="button"
                 onClick={() => handleAddToCart(item)}
-                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white"
+                className="mt-1.5 inline-block bg-white px-5 py-3 text-xs font-medium tracking-wide uppercase text-blue-700"
               >
                 {componentLevelLoader && componentLevelLoader.loading ? (
                   <ComponentLevelLoader
@@ -111,29 +111,29 @@ export default function CommonDetails({ item }) {
               </button>
             </div>
             <ul className="mt-8 space-y-2">
-              <li className="flex items-center text-left text-sm font-medium text-gray-600">
+              <li className="flex items-center text-left text-sm font-medium text-blue-200">
                 {item && item.deliveryInfo}
               </li>
-              <li className="flex items-center text-left text-sm font-medium text-gray-600">
+              <li className="flex items-center text-left text-sm font-medium text-blue-200">
                 {"Cancel anytime"}
               </li>
             </ul>
             <div className="lg:col-span-3">
-              <div className="border-b border-gray-400">
+              <div className="border-b border-blue-100">
                 <nav className="flex gap-4">
                   <a
                     href="#"
-                    className="border-b-2 border-gray-900 py-4 text-sm font-medium text-gray-900"
+                    className="border-b-2 border-gray-900 py-4 text-sm font-medium text-blue-400"
                   >
                     Description
                   </a>
                 </nav>
               </div>
             </div>
-            <div className="mt-8 flow-root sm:mt-12">
+            <div className="mt-8 flow-root sm:mt-12 text-white">
               {item && item.description}
             </div>
-          </div>
+          </div> 
 
         </div>
       </div>
