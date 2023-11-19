@@ -164,7 +164,7 @@ export default function Checkout() {
 
   if (orderSuccess) {
     return (
-      <section className="h-screen bg-gray-200">
+      <section className="h-screen bg-blue-300">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mt-8 max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
             <div className="bg-white shadow">
@@ -226,7 +226,7 @@ export default function Checkout() {
             )}
           </div>
         </div>
-        <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+        <div className="mt-10 bg-blue-50 px-4 pt-8 lg:mt-0">
           <p className="text-xl font-medium">Shipping address details</p>
           <p className="text-gray-400 font-bold">
             Complete your order by selecting address below
@@ -246,7 +246,7 @@ export default function Checkout() {
                   <p>City : {item.city}</p>
                   <p>Country : {item.country}</p>
                   <p>PostalCode : {item.postalCode}</p>
-                  <button className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                  <button className="mt-5 mr-5 inline-block bg-blue-700 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
                     {item._id === selectedAddress
                       ? "Selected Address"
                       : "Select Address"}
@@ -259,7 +259,7 @@ export default function Checkout() {
           </div>
           <button
             onClick={() => router.push("/account")}
-            className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+            className="mt-5 mr-5 inline-block bg-blue-700 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
           >
             Add new address
           </button>

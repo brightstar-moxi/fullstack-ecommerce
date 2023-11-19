@@ -204,17 +204,17 @@ export const navOptions = [
   ];
   
   export const firebaseConfig = {
-    apiKey: "AIzaSyDRTCZzEiqNIYCev3UHcVNeBKoRNrFl4R0",
-    authDomain: "ecommerce-for-brightstar.firebaseapp.com",
-    projectId: "ecommerce-for-brightstar",
-    storageBucket: "ecommerce-for-brightstar.appspot.com",
-    messagingSenderId: "38082421956",
-    appId: "1:38082421956:web:88742e9cc6341f5c119591",
-    measurementId: "G-XV2M83FN9P"
+    apiKey: "AIzaSyBNjKEZYrgDnYNuW9mSn7U2K-xNVImTB8M",
+    authDomain: "new-project-c9f46.firebaseapp.com",
+    projectId: "new-project-c9f46",
+    storageBucket: "new-project-c9f46.appspot.com",
+    messagingSenderId: "629819375589",
+    appId: "1:629819375589:web:d6f61f9c9ec1477330b90c",
+    measurementId: "G-GSCBM9RDH6"
   };
   
   export const firebaseStroageURL =
-    "gs://ecommerce-for-brightstar.appspot.com";
+    "gs://new-project-c9f46.appspot.com";
   
   export const addNewAddressFormControls = [
     {

@@ -71,7 +71,7 @@ export default function AdminView() {
                                     {allOrdersForAllUsers.map((item) => (
                                         <li
                                             key={item._id}
-                                            className="bg-green-200 shadow p-5 flex flex-col space-y-3 py-6 text-left"
+                                            className="bg-blue-100 shadow p-5 flex flex-col space-y-3 py-6 text-left"
                                         >
                                             <div className="flex">
                                                 <h1 className="font-bold text-lg mb-3 flex-1">
@@ -121,7 +121,7 @@ export default function AdminView() {
                                                 ))}
                                             </div>
                                             <div className="flex gap-5">
-                                                <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                                                <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-blue-600 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
                                                     {item.isProcessing
                                                         ? "Order is Processing"
                                                         : "Order is delivered"}
@@ -129,7 +129,7 @@ export default function AdminView() {
                                                 <button
                                                     disabled={!item.isProcessing}
                                                     onClick={() => handleUpdateOrderStatus(item)}
-                                                    className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                                                    className="disabled:opacity-50 mt-5 mr-5  inline-block bg-blue-600 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
                                                 >
                                                     {componentLevelLoader &&
                                                         componentLevelLoader.loading &&

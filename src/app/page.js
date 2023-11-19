@@ -57,7 +57,7 @@ export default function Home() {
                   <h2 className="text-xl font-bold text-blue-900 sm:text-3xl">
                     Summer Sale Collection</h2>
                 </div>
-                <button onClick={() => router.push('/product/listing/all-products')} className="mt-1.5 inline-block bg-blue-700 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide text-white">
+                <button onClick={() => router.push('/product/listing/all-products')} className="mt-1.5 inline-block bg-blue-700 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
                   Shop All
                 </button>
               </div>
@@ -66,7 +66,7 @@ export default function Home() {
               <ul className="grid grid-cols-2 gap-4">
                 {
                   products && products.length ?
-                    products.filter(item => item.onSale === 'yes').splice(0, 2).map(productItem => (
+                    products.filter(item => item.onSale === 'yes').splice(1, 2).map(productItem => (
                       <li onClick={() => router.push(`/product/$(productItem._id)`)} className="cursor-pointer" key={productItem._id} >
                         <div>
                           <img
@@ -76,8 +76,8 @@ export default function Home() {
                           />
                         </div>
                         <div className="mt-3">
-                          <h3 className="font-medium text-blue-500">{productItem.name}</h3>
-                          <p className="mt-1 text-sm text-blue-400">${productItem.price} {" "} <span className="text-red-700" >{`(-${productItem.priceDrop}%) off`}</span></p>
+                          <h3 className="font-medium text-blue-300">{productItem.name}</h3>
+                          <p className="mt-1 text-sm text-blue-200">${productItem.price} {" "} <span className="text-red-700" >{`(-${productItem.priceDrop}%) off`}</span></p>
                         </div>
                       </li>
                     ))
@@ -89,7 +89,7 @@ export default function Home() {
         </div>
         {/* https://ae01.alicdn.com/kf/HTB1srowXoz1gK0jSZLeq6z9kVXaJ/ULKNN-Girls-black-children-s-sports-shoes-spring-autumn-breathable-mesh-knit-shoes-pupils-kids-leisure.jpg */}
         {/* https://th.bing.com/th/id/OIP.GEgVZPRfuPqh_S_-ALhXEgHaJ3?w=900&h=1199&rs=1&pid=ImgDetMain" className="object-cover w-full aspect-square */}
-        <div className="max-w-screen-xl px-8 mx-auto sm:px-6 sm:py-12 lg: px-8 ">
+        <div className="max-w-screen-xl px-8 mx-auto sm:px-6 sm:py-12 lg:px-8 ">
           <div className="text-center">
             <h2 className="text-xl font-bold text-blue-200 sm:text-3xl">SHOP BY CATEGORY</h2>
           </div>
@@ -124,7 +124,7 @@ export default function Home() {
               <div className="relative block group">
                 <img src="https://th.bing.com/th/id/OIP.qcX4yujupWoVnjsZrLd7SwHaJc?rs=1&pid=ImgDetMain" className="object-cover w-full aspect-square" />
                 <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
-                  <h3 className="text-xl font-medium text-white">MAN</h3>
+                  <h3 className="text-xl font-medium text-blue-700">MAN</h3>
                   <button onClick={() => router.push('/product/listing/men')} className="mt-1.5 inline-block bg-blue-800 text-white px-5 py-3 text-xs font-medium uppercase tracking-wide text-blue-800">Shop Now</button>
                 </div>
               </div>

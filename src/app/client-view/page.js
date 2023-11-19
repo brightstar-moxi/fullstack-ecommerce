@@ -1,25 +1,27 @@
 "use client"
 import { GlobalContext } from "@/context"
- import { useContext } from "react"
+import { useContext } from "react"
 
-export default function ClientView(){
+export default function ClientView() {
 
     const { user } = useContext(GlobalContext);
 
-    return(
+    return (
         <section>
-               <div className="mx-auto mt-8 bg-gray-100 w-25 px-4 sm:px-6 lg:px-6">                   <div className="bg-white shadow">
-                        <div className="p-6 sm:p-6">
-                        
-                            <div className="flex flex-col flex-1 ">
-                                <h4 className="text-lg font-semibold text-center md:text-left"> You are welcome {user?.name}</h4>
-                               
-                              
-                            </div>
-                        </div>
+            <div className="mx-auto mt-20 bg-gray-100 w-25 px-4 sm:px-6 lg:px-6">               
+                <div className="bg-white shadow">
+                <div className="p-6 sm:p-6">
+
+                    <div className="flex flex-col flex-1 ">
+                        <h4 className="text-lg font-semibold text-center md:text-center"> You are welcome {user?.name}</h4>
+
+
                     </div>
                 </div>
-            </section>
+            </div>
+
+            </div>
+        </section>
     )
 }
 
