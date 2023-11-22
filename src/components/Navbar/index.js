@@ -86,7 +86,7 @@ export default function Navbar() {
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div onClick={() => router.push('/')} className="flex items-center cursor-pointer">
-            <span className="text-blue-700 slef-center text-2xl font-semibold whitespace-nowrap">
+            <span className="text-blue-700 slef-center text-base sm:text-2xl font-semibold whitespace-nowrap">
               Brightstar-Ecommerce
             </span>
 
