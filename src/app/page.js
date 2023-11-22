@@ -8,24 +8,24 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react"
 
 export default function Home() {
-
   const { isAuthUser } = useContext(GlobalContext);
+
   const [products, setProducts] = useState([]);
   const router = useRouter();
 
   async function getListOfProducts() {
-    const res = await getAllAdminProducts()
+    const res = await getAllAdminProducts();
 
     if (res.success) {
-      setProducts(res.data)
+      setProducts(res.data);
     }
   }
 
   useEffect(() => {
-    getListOfProducts()
-  }, [])
+    getListOfProducts();
+  }, []);
 
-  console.log(products)
+  console.log(products);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <section>

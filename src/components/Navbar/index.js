@@ -87,7 +87,7 @@ export default function Navbar() {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div onClick={() => router.push('/')} className="flex items-center cursor-pointer">
             <span className="text-blue-700 slef-center text-base sm:text-2xl font-semibold whitespace-nowrap">
-              Brightstar
+              Brightstar Collection
             </span>
 
           </div>
