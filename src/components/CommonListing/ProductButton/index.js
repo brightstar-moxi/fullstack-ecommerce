@@ -101,7 +101,7 @@ export default function ProductButton({ item }) {
         componentLevelLoader.id === item._id ? (
           <ComponentLevelLoader
             text={"Adding to cart"}
-            color={"#ffffff"}
+            color={"#0000FF"}
             loading={componentLevelLoader && componentLevelLoader.loading}
           />
         ) : (

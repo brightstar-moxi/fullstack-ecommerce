@@ -1,4 +1,5 @@
-
+// const { send } = require('micro');
+// const microCors = require('micro-cors')()
 
 
 // Add a New product service
@@ -75,6 +76,9 @@ export const deleteProduct = async (id) => {
          console.log(error);
     }
 }
+// export const get = microCors(async (req, res) => {
+//     send(res, 200, '/api/admin/delete-product?id=${id}');
+//   });
 
 
 export const productByCategory = async (id) => {
