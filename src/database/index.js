@@ -17,6 +17,36 @@
 
 // export default connectToDB
 
+// import mongoose from "mongoose";
+
+// const configOptions = {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// };
+// const apiUrl = process.env.DATABASE_MONGODB_SECRET;
+
+// const connectToDB = async () => {
+//   const connectionUrl =
+//   apiUrl;
+
+//   mongoose
+//     .connect(connectionUrl, configOptions)
+//     .then(() => console.log("Ecommerce database connected successfully!"))
+//     .catch((err) =>
+//       console.log(`Getting Error from DB connection ${err.message}`)
+//     );
+  
+// };
+
+// export default connectToDB;
+
+
+
+
+
+
+
+
 import mongoose from "mongoose";
 
 const configOptions = {
@@ -24,17 +54,17 @@ const configOptions = {
   useUnifiedTopology: true,
 };
 
-const connectToDB = async () => {
-  const connectionUrl =
-    "mongodb+srv://moxiz:123456782023@cluster0.vwvvdox.mongodb.net/";
+// const apiUrl = process.env.DATABASE_MONGODB_SECRET;
 
-  mongoose
-    .connect(connectionUrl, configOptions)
-    .then(() => console.log("Ecommerce database connected successfully!"))
-    .catch((err) =>
-      console.log(`Getting Error from DB connection ${err.message}`)
-    );
-  
+const connectToDB = async () => {
+  const connectionUrl = 'mongodb+srv://moxiz:123456782023@cluster0.vwvvdox.mongodb.net/';
+
+  try {
+    await mongoose.connect(connectionUrl, configOptions);
+    console.log("Ecommerce database connected successfully!");
+  } catch (err) {
+    console.log(`Error connecting to the database: ${err.message}`);
+  }
 };
 
 export default connectToDB;
