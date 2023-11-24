@@ -10,23 +10,23 @@ export const navOptions = [
     {
       id: "listing",
       label: "All Products",
-     href: "/product/listing/all-products",
+     path: "/product/listing/all-products",
     },
     
     {
       id: "listingMen",
       label: "Men",
-     href: "/product/listing/men",
+     path: "/product/listing/men",
     },
     {
       id: "listingWomen",
       label: "Women",
-     href: "/product/listing/women",
+     path: "/product/listing/women",
     },
     {
       id: "listingKids",
       label: "kids",
-     href: "/product/listing/kids",
+     path: "/product/listing/kids",
     },
   ];
   

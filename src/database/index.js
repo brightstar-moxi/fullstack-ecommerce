@@ -45,13 +45,23 @@
 
 
 
+// const mongoose = require('mongoose');
 
+// mongoose.connect('your-connection-string', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   connectTimeoutMS: 30000, // Increase the timeout as needed
+//   socketTimeoutMS: 30000,  // Increase the timeout as needed
+// });
 
 import mongoose from "mongoose";
 
-const configOptions = {
+const configOptions = { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  connectTimeoutMS: 30000, // Increase the timeout as needed
+  socketTimeoutMS: 30000,  // Increase the timeout as needed
+
 };
 
 // const apiUrl = process.env.DATABASE_MONGODB_SECRET;
